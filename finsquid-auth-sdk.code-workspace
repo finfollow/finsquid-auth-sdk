@@ -1,0 +1,24 @@
+{
+  "folders": [
+    {
+      "path": "./"
+    }
+  ],
+  "settings": {
+    "javascript.validate.enable": false,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.useTabs": false,
+    "prettier.tabWidth": 2,
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[handlebars]": {
+      "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+  }
+}

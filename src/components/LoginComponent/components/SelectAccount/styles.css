@@ -1,0 +1,4 @@
+.disabled-row {
+  background: rgba(245, 247, 254, 0.6);
+  cursor: default;
+}

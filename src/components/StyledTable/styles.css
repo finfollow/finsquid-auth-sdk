@@ -1,0 +1,17 @@
+/* styling header titles */
+.ant-table-thead > tr > td,
+th {
+  background: white !important;
+  color: #d9dbe2 !important;
+  font-weight: bold !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-bottom: 8px !important;
+  border-bottom: none !important;
+}
+
+/* hiding header columns divider */
+.ant-table-thead > tr > td::before,
+th::before {
+  width: 0 !important;
+}
