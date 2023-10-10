@@ -4,7 +4,6 @@ import StyledTable from "components/StyledTable";
 import { Position } from "gateway-api/types";
 import { categorizePositionsByType, currencyValue } from "utils/helpers";
 import {
-  useLoginProvider,
   useReceivingAccount,
   useTransferingAccount,
   useTransferingPrositions,
@@ -13,33 +12,25 @@ import {
 import useScreenSize from "utils/useScreenSize";
 import { SwapOutlined } from "@ant-design/icons";
 import BankLogo from "components/BankLogo";
+import { useState } from "react";
 
 type Props = {
   onSubmit: () => void;
 };
 
 export default function TransactionSummary({ onSubmit }: Props) {
-  const searchParams = new URLSearchParams(document.location.search);
   const { height } = useScreenSize();
   const { xs } = Grid.useBreakpoint();
-  const [_, setLoginProvider] = useLoginProvider();
-  const [tProvider, setTransferingProvider] = useTransferingProvider();
-  const [tAccount, setTransferingAccount] = useTransferingAccount();
-  const [receivingAccount, setReceivingAccount] = useReceivingAccount();
-  const [tPositions, setTransferingPositions] = useTransferingPrositions();
+  const [isLoading, setIsLoading] = useState(false);
+  const [tProvider] = useTransferingProvider();
+  const [tAccount] = useTransferingAccount();
+  const [receivingAccount] = useReceivingAccount();
+  const [tPositions] = useTransferingPrositions();
   const tableHeight = xs ? height * 0.3 : 300;
 
   const handleSubmit = () => {
-    const redirectLink = searchParams.get("redirect");
-    if (redirectLink) window.parent.location.href = redirectLink;
-    else {
-      setLoginProvider(null);
-      setTransferingProvider(null);
-      setTransferingAccount(null);
-      setReceivingAccount(null);
-      setTransferingPositions([]);
-      onSubmit();
-    }
+    setIsLoading(true);
+    setTimeout(onSubmit, 1000);
   };
 
   return (
@@ -49,6 +40,7 @@ export default function TransactionSummary({ onSubmit }: Props) {
         flexGrow: 1,
         flexDirection: "column",
         justifyContent: "space-between",
+        alignItems: "center",
       }}
     >
       <div>
@@ -59,115 +51,89 @@ export default function TransactionSummary({ onSubmit }: Props) {
             marginBottom: 40,
           }}
         >
-          <div style={{ flex: 0.4 }}>
-            <Typography.Text>From</Typography.Text>
-            <div style={{ display: "flex", marginTop: 14 }}>
-              <BankLogo src={tProvider?.iconUrl} />
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  flexDirection: "column",
-                  padding: "0 12px",
-                }}
-              >
-                <Typography.Text>{tProvider?.displayName}</Typography.Text>
-                <Typography.Text>
-                  <b>{tAccount?.name}</b>
-                </Typography.Text>
-              </div>
-            </div>
+          <div
+            style={{
+              flex: 0.4,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center",
+            }}
+          >
+            <BankLogo src={tProvider?.iconUrl} style={{ marginBottom: 8 }} />
+            <Typography.Text>{tProvider?.displayName}</Typography.Text>
+            <Typography.Text>
+              <b>{tAccount?.name}</b>
+            </Typography.Text>
           </div>
           <div style={{ display: "flex", flex: 0.2, justifyContent: "center" }}>
             <SwapOutlined style={{ fontSize: 32 }} />
           </div>
-          <div style={{ flex: 0.4, paddingLeft: 8 }}>
-            <Typography.Text>To</Typography.Text>
-            <div style={{ display: "flex", marginTop: 14 }}>
-              <div>
-                <div
-                  style={{
-                    width: 48,
-                    height: 48,
-                    borderRadius: 23,
-                    border: "1px solid #D9DBE2",
-                    background: "#fff",
-                    display: "flex",
-                    alignItems: "center",
-                    textAlign: "center",
-                    fontSize: 12,
-                  }}
-                >
-                  <Typography.Text style={{ fontSize: 12 }}>
-                    Your logo
-                  </Typography.Text>
-                </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  flexDirection: "column",
-                  padding: "0 12px",
-                }}
-              >
-                <Typography.Text>{receivingAccount?.provider}</Typography.Text>
-                <Typography.Text>
-                  <b>{receivingAccount?.name}</b>
-                </Typography.Text>
-              </div>
+          <div
+            style={{
+              flex: 0.4,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center",
+            }}
+          >
+            <div
+              style={{
+                width: 48,
+                height: 48,
+                borderRadius: 23,
+                border: "1px solid #D9DBE2",
+                background: "#fff",
+                display: "flex",
+                alignItems: "center",
+                textAlign: "center",
+                fontSize: 12,
+                marginBottom: 8,
+              }}
+            >
+              <Typography.Text style={{ fontSize: 12 }}>
+                Your logo
+              </Typography.Text>
             </div>
+            <Typography.Text>{receivingAccount?.provider}</Typography.Text>
+            <Typography.Text>
+              <b>{receivingAccount?.name}</b>
+            </Typography.Text>
           </div>
         </div>
-        <div>
-          <Typography.Text>Details</Typography.Text>
-          <StyledTable
-            columns={columns}
-            dataSource={categorizePositionsByType(tPositions)}
-            style={{ cursor: "pointer", height: tableHeight }}
-            containerStyle={{ marginTop: 10 }}
-            scroll={{ x: true, y: tableHeight }}
-            expandable={{
-              expandedRowRender: (record) => {
-                const columns: ColumnsType<Position> = [
-                  {
-                    title: "",
-                    dataIndex: "name",
-                    render: (_, pos) => pos.instrument?.name,
-                  },
-                  {
-                    title: "",
-                    dataIndex: "marketValueAC",
-                    align: "right",
-                    render: (m) => <b>{currencyValue(m)}</b>,
-                  },
-                ];
+        <StyledTable
+          tableTitle="Details"
+          columns={columns}
+          dataSource={categorizePositionsByType(tPositions)}
+          style={{ cursor: "pointer", height: tableHeight }}
+          containerStyle={{ marginTop: 10, borderRadius: xs ? 0 : 10 }}
+          scroll={{ x: true, y: tableHeight }}
+          expandable={{
+            expandedRowRender: (record) => {
+              const columns: ColumnsType<Position> = [
+                {
+                  title: "",
+                  dataIndex: "name",
+                  render: (_, pos) => pos.instrument?.name,
+                },
+                {
+                  title: "",
+                  dataIndex: "marketValueAC",
+                  align: "right",
+                  render: (m) => <b>{currencyValue(m)}</b>,
+                },
+              ];
 
-                return (
-                  <StyledTable
-                    columns={columns}
-                    dataSource={record.positions}
-                  />
-                );
-              },
-              defaultExpandAllRows: true,
-            }}
-          />
-        </div>
+              return (
+                <StyledTable columns={columns} dataSource={record.positions} />
+              );
+            },
+            defaultExpandAllRows: true,
+          }}
+        />
       </div>
-      <Button
-        type={"primary"}
-        block
-        style={{
-          height: 40,
-          borderRadius: 20,
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        onClick={handleSubmit}
-      >
+      <Button type={"primary"} block onClick={handleSubmit} loading={isLoading}>
         Confirm Transfer
         <Image
           preview={false}
@@ -176,7 +142,7 @@ export default function TransactionSummary({ onSubmit }: Props) {
             objectFit: "cover",
             width: 30,
             height: 40,
-            top: -20,
+            top: -25,
             left: 20,
           }}
           src="BankID_logo_white.svg"

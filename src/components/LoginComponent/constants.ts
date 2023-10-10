@@ -13,7 +13,8 @@ export type StepsT = Record<
   | "selectAccount"
   | "selectPositions"
   | "selectReceivingAccount"
-  | "transactionSummary",
+  | "transactionSummary"
+  | "finalResult",
   StepT
 >;
 
@@ -96,6 +97,12 @@ export const steps: StepsT = {
     value: "transactionSummary",
     wrapperStep: StepsEnum["ConfirmTransfer"],
     prevStep: "selectReceivingAccount",
+  },
+  finalResult: {
+    title: "",
+    value: "finalResult",
+    wrapperStep: StepsEnum["ConfirmTransfer"],
+    prevStep: null,
   },
 };
 

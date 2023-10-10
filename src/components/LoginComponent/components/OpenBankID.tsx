@@ -72,14 +72,6 @@ export default function OpenBankId({ onSuccess }: Props) {
         loading={isLoading}
         disabled={!autostartToken}
         block
-        style={{
-          height: 40,
-          borderRadius: 20,
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
         onClick={() => {
           window.open(
             isAndroid
@@ -97,7 +89,7 @@ export default function OpenBankId({ onSuccess }: Props) {
             objectFit: "cover",
             width: 30,
             height: 40,
-            top: -20,
+            top: -25,
             left: 20,
           }}
           src="BankID_logo_white.svg"

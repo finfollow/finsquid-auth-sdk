@@ -1,7 +1,6 @@
-import { Grid, Space, Typography, theme } from "antd";
+import { Grid, Typography, theme } from "antd";
 import { ReactNode } from "react";
 import BackButton from "components/BackButton";
-import useScreenSize from "utils/useScreenSize";
 import Stepper from "./Stepper";
 
 type Props = {
@@ -25,13 +24,27 @@ export default function Wrapper({
   currentStep,
   onBack,
 }: Props) {
-  const { height, width } = useScreenSize();
   const { token } = theme.useToken();
-  const { lg, md, sm, xs } = Grid.useBreakpoint();
+  const { lg, xs } = Grid.useBreakpoint();
 
   return (
-    <Space style={{ display: "flex", justifyContent: "center" }}>
-      <div>
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      <div
+        style={{
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          background: token.colorBgLayout,
+          padding: xs ? "40px 0 20px 0" : "50px 50px 20px 50px",
+        }}
+      >
+        {onBack && <BackButton onClick={onBack} />}
         {currentStep !== undefined && (
           <Stepper
             current={currentStep}
@@ -39,34 +52,18 @@ export default function Wrapper({
             containerStyles={{ marginBottom: 24 }}
           />
         )}
-        <div
+        <Typography.Title
+          level={xs ? 3 : 1}
           style={{
-            boxSizing: "border-box",
-            position: "relative",
-            width: md ? 550 : sm ? 450 : xs ? width : "auto",
-            minHeight: 300,
-            height: xs ? height - 24 : 780,
-            background: token.colorBgLayout,
-            borderRadius: 55,
-            padding: lg ? "50px 50px 20px 50px" : "40px 25px 20px 25px",
-            display: "flex",
-            flexDirection: "column",
+            textAlign: "center",
+            marginBottom: lg ? 50 : 40,
+            padding: "0 45px",
           }}
         >
-          {onBack && <BackButton onClick={onBack} />}
-          <Typography.Title
-            level={xs ? 3 : 1}
-            style={{
-              textAlign: "center",
-              marginBottom: lg ? 50 : 40,
-              padding: "0 35px",
-            }}
-          >
-            {title}
-          </Typography.Title>
-          {children}
-        </div>
+          {title}
+        </Typography.Title>
+        {children}
       </div>
-    </Space>
+    </div>
   );
 }

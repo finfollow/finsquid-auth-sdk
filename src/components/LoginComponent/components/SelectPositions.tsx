@@ -22,7 +22,7 @@ type Props = {
   onSubmit: () => void;
 };
 
-export default function SelectPrositions({ onSubmit }: Props) {
+export default function SelectPositions({ onSubmit }: Props) {
   const { token } = theme.useToken();
   const { height } = useScreenSize();
   const { xs } = Grid.useBreakpoint();
@@ -59,10 +59,11 @@ export default function SelectPrositions({ onSubmit }: Props) {
         flexGrow: 1,
         flexDirection: "column",
         justifyContent: "space-between",
+        alignItems: "center",
       }}
     >
       <div>
-        <Space size={"middle"}>
+        <Space size={"middle"} style={{ padding: xs ? "0 25px" : 0 }}>
           <BankLogo src={provider?.iconUrl} />
           <Typography.Text>
             Select which positions that you would like to transfer.
@@ -74,6 +75,7 @@ export default function SelectPrositions({ onSubmit }: Props) {
             display: "flex",
             justifyContent: "space-between",
             marginTop: 20,
+            padding: xs ? "0 25px" : 0,
           }}
         >
           <div style={{ display: "flex" }}>
@@ -128,7 +130,6 @@ export default function SelectPrositions({ onSubmit }: Props) {
                 height: 40,
                 borderRadius: 20,
                 borderColor: token.colorPrimary,
-                borderWidth: 2,
               }}
             >
               Unselect all
@@ -143,7 +144,7 @@ export default function SelectPrositions({ onSubmit }: Props) {
             key: index.toString(),
           }))}
           style={{ cursor: "pointer", height: xs ? height * 0.4 : 400 }}
-          containerStyle={{ marginTop: 20 }}
+          containerStyle={{ marginTop: 20, borderRadius: xs ? 0 : 10 }}
           scroll={{ x: true, y: xs ? height * 0.4 : 400 }}
           expandable={{
             expandedRowRender: (record) => {
@@ -204,12 +205,7 @@ export default function SelectPrositions({ onSubmit }: Props) {
         type="primary"
         block
         disabled={!transferingPositions.length}
-        style={{
-          height: 40,
-          borderRadius: 20,
-          borderColor: token.colorPrimary,
-          borderWidth: 2,
-        }}
+        style={{ borderColor: token.colorPrimary }}
         onClick={onSubmit}
       >
         Next

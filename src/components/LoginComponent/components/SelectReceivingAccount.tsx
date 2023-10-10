@@ -105,10 +105,11 @@ export default function SelectReceivingAccount({ onSubmit }: Props) {
         flexGrow: 1,
         flexDirection: "column",
         justifyContent: "space-between",
+        alignItems: "center",
       }}
     >
       <div>
-        <Space size={"middle"}>
+        <Space size={"middle"} style={{ padding: xs ? "0 25px" : 0 }}>
           <BankLogo src={provider?.iconUrl} />
           <Typography.Text>
             Select to which account you’d like to transfer your positions. You
@@ -122,7 +123,7 @@ export default function SelectReceivingAccount({ onSubmit }: Props) {
           dataSource={data?.accounts || []}
           rowKey={(acc) => acc.providerAccountId as string}
           style={{ cursor: "pointer" }}
-          containerStyle={{ marginTop: 20 }}
+          containerStyle={{ marginTop: 20, borderRadius: xs ? 0 : 10 }}
           onRow={(acc) => ({
             onClick: () =>
               transferingAccount?.type === acc.type &&
@@ -137,10 +138,6 @@ export default function SelectReceivingAccount({ onSubmit }: Props) {
         type="primary"
         block
         disabled={!receivingAccount}
-        style={{
-          height: 40,
-          borderRadius: 20,
-        }}
         onClick={onSubmit}
       >
         Next

@@ -27,18 +27,17 @@ export default function ConnectViaSSN({ setNextStep }: Props) {
 
   return (
     <>
-      <Space size={"middle"}>
-        <BankLogo src={provider.iconUrl} />
+      <div style={{ width: 232, marginTop: 20 }}>
         <Typography.Text>
           Type in you Social Security Number (Personnummer) below.
         </Typography.Text>
-      </Space>
+      </div>
       <div style={{ margin: "40px 0" }}>
         <Input
           value={ssn}
           onChange={(e) => setSsn(e.target.value)}
-          placeholder="Ex 19850709-9805"
-          style={{ borderRadius: 20, height: 40, textAlign: "center" }}
+          placeholder="YYYYMMDDXXXX"
+          style={{ width: 232, height: 40, textAlign: "center" }}
           onPressEnter={onSubmit}
         />
       </div>
@@ -46,14 +45,6 @@ export default function ConnectViaSSN({ setNextStep }: Props) {
         type={"primary"}
         disabled={!Personnummer.valid(ssn)}
         block
-        style={{
-          height: 40,
-          borderRadius: 20,
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
         onClick={onSubmit}
       >
         Connect Bank
@@ -65,7 +56,7 @@ export default function ConnectViaSSN({ setNextStep }: Props) {
               objectFit: "cover",
               width: 30,
               height: 40,
-              top: -20,
+              top: -25,
               left: 20,
             }}
             src="BankID_logo_white.svg"

@@ -109,10 +109,11 @@ export default function SelectAccount({ onSubmit, radioBtns }: Props) {
         flexGrow: 1,
         flexDirection: "column",
         justifyContent: "space-between",
+        alignItems: "center",
       }}
     >
       <div>
-        <Space size={"middle"}>
+        <Space size={"middle"} style={{ padding: xs ? "0 25px" : 0 }}>
           <BankLogo src={provider?.iconUrl} />
           <Typography.Text>
             Choose the account or individual positions that you would like to
@@ -125,7 +126,7 @@ export default function SelectAccount({ onSubmit, radioBtns }: Props) {
           dataSource={data?.accounts || []}
           rowKey={(acc) => acc.providerAccountId as string}
           style={{ cursor: "pointer" }}
-          containerStyle={{ marginTop: 20 }}
+          containerStyle={{ marginTop: 20, borderRadius: xs ? 0 : 10 }}
           onRow={(acc) => ({
             onClick: () => {
               if (isTransferableAccount(acc.type)) {
@@ -153,10 +154,6 @@ export default function SelectAccount({ onSubmit, radioBtns }: Props) {
           type="primary"
           block
           disabled={!transferingAccount}
-          style={{
-            height: 40,
-            borderRadius: 20,
-          }}
           onClick={onSubmit}
         >
           Next

@@ -85,18 +85,14 @@ export default function SelectUserAccount({ onSuccess }: Props) {
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <Typography.Text
-        style={{ textAlign: "center", fontWeight: "bold", fontSize: 24 }}
-      >
-        Select user account
-      </Typography.Text>
-      <Typography.Text style={{ textAlign: "center" }}>
+      <Typography.Text style={{ width: 250 }}>
         You have more than one user accounts with this bank. Select which one
         that you would like to connect.
       </Typography.Text>
       <Select
         value={selectedAccount}
-        style={{ width: 250, marginTop: 50 }}
+        style={{ width: 250, height: 48, marginTop: 30 }}
+        placeholder={"-- Select --"}
         loading={isSelectLoading}
         onChange={setSelectedAccount}
         options={useraccounts?.map((el) => ({

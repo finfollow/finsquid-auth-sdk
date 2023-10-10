@@ -5,6 +5,7 @@ import { Refine } from "@refinedev/core";
 import { LoginComponentType } from "components/LoginComponent/LoginComponent";
 import { ConfigProvider, theme } from "antd";
 import "@refinedev/antd/dist/reset.css";
+import "./styles.css";
 
 const API_URL = "http://localhost:3000";
 
@@ -15,15 +16,18 @@ function App() {
   axiosInstance.defaults.headers.common = {
     Authorization: `Bearer ${searchParams.get("api_key")}`,
   };
+  const themeParams = searchParams.get("theme");
+  const clientTheme =
+    themeParams && JSON.parse(decodeURIComponent(themeParams));
 
   return (
     <ConfigProvider
       theme={{
         algorithm: theme.defaultAlgorithm,
         token: {
-          colorPrimary: "#7D00FF",
           colorBgContainer: "#FFFFFF",
           colorBgLayout: "#F5F7FE",
+          ...clientTheme,
         },
       }}
     >

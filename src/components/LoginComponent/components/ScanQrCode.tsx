@@ -110,14 +110,8 @@ export default function ScanQrCode({ onSuccess, onCancel }: Props) {
         />
       </div>
       <Button
-        style={{
-          height: 40,
-          borderRadius: 20,
-          paddingLeft: 40,
-          paddingRight: 40,
-          borderColor: token.colorPrimary,
-          borderWidth: 2,
-        }}
+        block
+        style={{ borderColor: token.colorPrimary }}
         onClick={onCancel}
       >
         Cancel

@@ -44,12 +44,7 @@ export default function WaitingConnection({ onSuccess, onRetry }: Props) {
         <Button
           type="primary"
           block
-          style={{
-            height: 40,
-            borderRadius: 20,
-            position: "relative",
-            marginTop: 30,
-          }}
+          style={{ marginTop: 30 }}
           onClick={onRetry}
         >
           Try again

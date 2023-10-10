@@ -75,20 +75,15 @@ export default function SuccessConnect({ onSubmit, onBack }: Props) {
           {accountsNumber} {isPluralAccounts ? "accounts" : "account"}
         </Typography.Text>
         <Typography.Text>
-          {isPluralAccounts ? "were" : "was"} successfully
+          {isPluralAccounts ? "were" : "was"} successfully connected
         </Typography.Text>
-        <Typography.Text>connected from your bank!</Typography.Text>
+        <Typography.Text>from your bank!</Typography.Text>
       </Space>
       <Space direction="vertical" style={{ marginTop: 50 }}>
         {!onSubmit && (
           <Button
             block
-            style={{
-              height: 40,
-              borderRadius: 20,
-              borderColor: token.colorPrimary,
-              borderWidth: 2,
-            }}
+            style={{ borderColor: token.colorPrimary }}
             onClick={onBack}
           >
             Add Bank
@@ -97,13 +92,6 @@ export default function SuccessConnect({ onSubmit, onBack }: Props) {
         <Button
           type="primary"
           block
-          style={{
-            height: 40,
-            borderRadius: 20,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
           onClick={() => (onSubmit ? onSubmit() : handleSubmit())}
         >
           Done

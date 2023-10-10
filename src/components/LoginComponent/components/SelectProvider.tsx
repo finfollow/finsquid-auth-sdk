@@ -3,7 +3,6 @@ import { Button, Grid, Input, List, theme } from "antd";
 import BankListItem from "./BankListItem";
 import { SearchOutlined } from "@ant-design/icons";
 import { useLoginProvider } from "utils/state-utils";
-import useScreenSize from "utils/useScreenSize";
 import { useProviders } from "gateway-api/gateway-service";
 import { Provider } from "gateway-api/types";
 import { errorNotifier, tablesSort } from "utils/helpers";
@@ -15,7 +14,6 @@ type Props = {
 
 export default function SelectProvider({ onSubmit, radioBtns }: Props) {
   const { token } = theme.useToken();
-  const { height } = useScreenSize();
   const { lg, xs } = Grid.useBreakpoint();
   const { data, isFetching, error } = useProviders();
   const [banks, setBanks] = useState<Provider[]>([]);
@@ -48,11 +46,15 @@ export default function SelectProvider({ onSubmit, radioBtns }: Props) {
 
   return (
     <>
-      <div style={{ padding: lg ? "0 70px 40px 70px" : "0 40px 30px 40px" }}>
+      <div
+        style={{
+          padding: lg ? "0 70px 40px 70px" : "0 40px 30px 40px",
+        }}
+      >
         <Input
           onChange={handleSearch}
-          style={{ borderRadius: 20, height: 40 }}
-          prefix={<SearchOutlined />}
+          style={{ borderRadius: 24, height: 48, width: 200 }}
+          prefix={<SearchOutlined style={{ fontSize: 22 }} />}
         />
       </div>
       <div style={{ flex: "auto" }}>
@@ -74,9 +76,11 @@ export default function SelectProvider({ onSubmit, radioBtns }: Props) {
           )}
           bordered
           style={{
-            height: xs ? height * 0.6 : 460,
+            width: 300,
+            height: "60vh",
             overflow: "scroll",
             background: token.colorBgContainer,
+            borderRadius: 0,
           }}
         />
       </div>

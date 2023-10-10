@@ -23,16 +23,7 @@ export default function BankIdOption({
 
   return (
     <Space direction="vertical">
-      <Button
-        type="primary"
-        block
-        style={{
-          height: 40,
-          borderRadius: 20,
-          position: "relative",
-        }}
-        onClick={() => onSubmit(true)}
-      >
+      <Button type="primary" block onClick={() => onSubmit(true)}>
         Same Device
         <Image
           preview={false}
@@ -49,12 +40,7 @@ export default function BankIdOption({
       </Button>
       <Button
         block
-        style={{
-          height: 40,
-          borderRadius: 20,
-          borderColor: token.colorPrimary,
-          borderWidth: 2,
-        }}
+        style={{ borderColor: token.colorPrimary }}
         onClick={() => onSubmit(false)}
       >
         Other Device

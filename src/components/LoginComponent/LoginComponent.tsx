@@ -9,10 +9,11 @@ import SuccessConnect from "./components/SuccessConnect";
 import WaitingConnection from "./components/WaitingConnection";
 import SelectUserAccount from "./components/SelectUserAccount";
 import SelectAccount from "./components/SelectAccount";
-import SelectPrositions from "./components/SelectPrositions";
+import SelectPositions from "./components/SelectPositions";
 import SelectReceivingAccount from "./components/SelectReceivingAccount";
 import TransactionSummary from "./components/TransactionSummary";
 import OpenBankID from "./components/OpenBankID";
+import FinalResult from "./components/FinalResult";
 
 type Props = {
   type: LoginComponentType;
@@ -84,7 +85,7 @@ export default function ConnectAccount({ type, radioBtns }: Props) {
         />
       )}
       {step.value === "selectPositions" && (
-        <SelectPrositions
+        <SelectPositions
           onSubmit={() => nextStep(steps.selectReceivingAccount)}
         />
       )}
@@ -94,7 +95,10 @@ export default function ConnectAccount({ type, radioBtns }: Props) {
         />
       )}
       {step.value === "transactionSummary" && (
-        <TransactionSummary onSubmit={() => setStep(steps.selectProvider)} />
+        <TransactionSummary onSubmit={() => setStep(steps.finalResult)} />
+      )}
+      {step.value === "finalResult" && (
+        <FinalResult onSubmit={() => setStep(steps.selectProvider)} />
       )}
     </Wrapper>
   );

@@ -13,12 +13,18 @@ export default function LoginOptions({ setNextStep }: Props) {
 
   return (
     <>
-      <Space size={"middle"}>
-        <BankLogo src={provider?.iconUrl} />
-        <Typography.Text>
-          Connect your bank accounts with BankID and find all account
-          information.
-        </Typography.Text>
+      <Space
+        size={"middle"}
+        direction="vertical"
+        style={{ alignItems: "center" }}
+      >
+        <BankLogo src={provider?.iconUrl} style={{ width: 100, height: 100 }} />
+        <div style={{ width: 220, textAlign: "center", marginTop: 20 }}>
+          <Typography.Text>
+            Connect your bank accounts with BankID and find all account
+            information.
+          </Typography.Text>
+        </div>
       </Space>
       <div
         style={{
