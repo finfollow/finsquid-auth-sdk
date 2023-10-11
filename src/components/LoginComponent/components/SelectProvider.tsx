@@ -6,6 +6,7 @@ import { useLoginProvider } from "utils/state-utils";
 import { useProviders } from "gateway-api/gateway-service";
 import { Provider } from "gateway-api/types";
 import { errorNotifier, tablesSort } from "utils/helpers";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onSubmit: () => void;
@@ -13,6 +14,7 @@ type Props = {
 };
 
 export default function SelectProvider({ onSubmit, radioBtns }: Props) {
+  const { t } = useTranslation();
   const { token } = theme.useToken();
   const { lg, xs } = Grid.useBreakpoint();
   const { data, isFetching, error } = useProviders();
@@ -62,6 +64,7 @@ export default function SelectProvider({ onSubmit, radioBtns }: Props) {
           size={xs ? "small" : "default"}
           dataSource={banks}
           loading={isFetching}
+          rowKey={"id"}
           renderItem={(item) => (
             <BankListItem
               item={item}
@@ -92,7 +95,7 @@ export default function SelectProvider({ onSubmit, radioBtns }: Props) {
           style={{ height: 40, borderRadius: 20 }}
           onClick={onSubmit}
         >
-          Next
+          {t("button.Next")}
         </Button>
       )}
     </>

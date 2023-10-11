@@ -2,10 +2,11 @@ import { Grid, Typography, theme } from "antd";
 import { ReactNode } from "react";
 import BackButton from "components/BackButton";
 import Stepper from "./Stepper";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   children?: ReactNode;
-  title: string;
+  title?: string;
   currentStep?: StepsEnum;
   onBack?: () => void;
 };
@@ -24,6 +25,7 @@ export default function Wrapper({
   currentStep,
   onBack,
 }: Props) {
+  const { t } = useTranslation();
   const { token } = theme.useToken();
   const { lg, xs } = Grid.useBreakpoint();
 
@@ -48,7 +50,7 @@ export default function Wrapper({
         {currentStep !== undefined && (
           <Stepper
             current={currentStep}
-            items={steps.map((el) => ({ title: el }))}
+            items={steps.map((step) => ({ title: t(`stepper.${step}`) }))}
             containerStyles={{ marginBottom: 24 }}
           />
         )}
@@ -60,7 +62,7 @@ export default function Wrapper({
             padding: "0 45px",
           }}
         >
-          {title}
+          {title && t(`title.${title}`)}
         </Typography.Title>
         {children}
       </div>

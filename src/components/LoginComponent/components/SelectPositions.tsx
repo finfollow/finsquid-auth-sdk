@@ -17,12 +17,14 @@ import {
 import useScreenSize from "utils/useScreenSize";
 import RadioIcon from "./RadioIcon";
 import BankLogo from "components/BankLogo";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onSubmit: () => void;
 };
 
 export default function SelectPositions({ onSubmit }: Props) {
+  const { t } = useTranslation();
   const { token } = theme.useToken();
   const { height } = useScreenSize();
   const { xs } = Grid.useBreakpoint();
@@ -32,7 +34,9 @@ export default function SelectPositions({ onSubmit }: Props) {
   const [transferingAccount] = useTransferingAccount();
   if (!provider?.sid || !transferingAccount?.providerAccountId)
     return (
-      <Typography.Text>There is no session ID or account ID</Typography.Text>
+      <Typography.Text>
+        {t("error.There is no session ID or account ID")}
+      </Typography.Text>
     );
   const { isFetching, data, error } = useAccountPositions(
     provider?.sid,
@@ -52,6 +56,14 @@ export default function SelectPositions({ onSubmit }: Props) {
       });
   }, [error]);
 
+  const columns: ColumnsType<{ type?: string; positions: Position[] }> = [
+    {
+      title: "",
+      dataIndex: "type",
+      render: (type) => <b>{t(`instrumentType.${type}`)}</b>,
+    },
+  ];
+
   return (
     <div
       style={{
@@ -66,7 +78,7 @@ export default function SelectPositions({ onSubmit }: Props) {
         <Space size={"middle"} style={{ padding: xs ? "0 25px" : 0 }}>
           <BankLogo src={provider?.iconUrl} />
           <Typography.Text>
-            Select which positions that you would like to transfer.
+            {t("Select which positions that you would like to transfer.")}
           </Typography.Text>
         </Space>
 
@@ -87,12 +99,12 @@ export default function SelectPositions({ onSubmit }: Props) {
                   lineHeight: "inherit",
                 }}
               >
-                Bank:
+                {t("Bank")}
               </Typography.Text>{" "}
               <Typography.Text
                 style={{ display: "block", lineHeight: "inherit" }}
               >
-                Account:
+                {t("Account")}
               </Typography.Text>
             </div>
             <div>
@@ -121,7 +133,7 @@ export default function SelectPositions({ onSubmit }: Props) {
                 borderRadius: 20,
               }}
             >
-              Select all
+              {t("button.Select all")}
             </Button>
           ) : !!data?.length && transferingPositions.length === data?.length ? (
             <Button
@@ -132,7 +144,7 @@ export default function SelectPositions({ onSubmit }: Props) {
                 borderColor: token.colorPrimary,
               }}
             >
-              Unselect all
+              {t("button.Unselect all")}
             </Button>
           ) : null}
         </div>
@@ -151,17 +163,6 @@ export default function SelectPositions({ onSubmit }: Props) {
               const columns: ColumnsType<Position> = [
                 {
                   title: "",
-                  dataIndex: "name",
-                  render: (_, pos) => pos.instrument?.name,
-                },
-                {
-                  title: "",
-                  dataIndex: "marketValueAC",
-                  align: "right",
-                  render: (m) => <b>{currencyValue(m)}</b>,
-                },
-                {
-                  title: "",
                   key: "select",
                   width: 20,
                   render: (_, pos) => (
@@ -175,6 +176,17 @@ export default function SelectPositions({ onSubmit }: Props) {
                       square
                     />
                   ),
+                },
+                {
+                  title: "",
+                  dataIndex: "name",
+                  render: (_, pos) => pos.instrument?.name,
+                },
+                {
+                  title: "",
+                  dataIndex: "marketValueAC",
+                  align: "right",
+                  render: (m) => <b>{currencyValue(m)}</b>,
                 },
               ];
 
@@ -208,16 +220,8 @@ export default function SelectPositions({ onSubmit }: Props) {
         style={{ borderColor: token.colorPrimary }}
         onClick={onSubmit}
       >
-        Next
+        {t("button.Next")}
       </Button>
     </div>
   );
 }
-
-const columns: ColumnsType<{ type: string; positions: Position[] }> = [
-  {
-    title: "",
-    dataIndex: "type",
-    render: (type) => <b>{type}</b>,
-  },
-];

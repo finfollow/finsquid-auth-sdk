@@ -6,7 +6,7 @@ type Props = StepsProps & {
 
 export default function Stepper({ containerStyles, ...props }: Props) {
   const { xs } = Grid.useBreakpoint();
-  console.log("Grid.useBreakpoint(); ", Grid.useBreakpoint());
+
   return (
     <div
       style={{

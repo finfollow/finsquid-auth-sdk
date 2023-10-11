@@ -19,7 +19,7 @@ export type StepsT = Record<
 >;
 
 export type StepT = {
-  title: string;
+  title?: string;
   wrapperStep: StepsEnum;
   value: keyof StepsT;
   prevStep: keyof StepsT | null;
@@ -99,7 +99,6 @@ export const steps: StepsT = {
     prevStep: "selectReceivingAccount",
   },
   finalResult: {
-    title: "",
     value: "finalResult",
     wrapperStep: StepsEnum["ConfirmTransfer"],
     prevStep: null,

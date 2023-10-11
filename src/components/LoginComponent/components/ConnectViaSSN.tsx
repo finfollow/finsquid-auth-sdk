@@ -1,18 +1,19 @@
-import { Button, Image, Input, Space, Typography } from "antd";
+import { Button, Image, Input, Typography } from "antd";
 import {
   useConnectionSSN,
   useLoginIsSameDevice,
   useLoginProvider,
 } from "utils/state-utils";
 import { StepT, steps } from "../constants";
-import BankLogo from "components/BankLogo";
 import Personnummer from "personnummer";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   setNextStep: React.Dispatch<React.SetStateAction<StepT>>;
 };
 
 export default function ConnectViaSSN({ setNextStep }: Props) {
+  const { t } = useTranslation();
   const [ssn, setSsn] = useConnectionSSN();
   const [provider] = useLoginProvider();
   const [isSameDevice] = useLoginIsSameDevice();
@@ -29,14 +30,14 @@ export default function ConnectViaSSN({ setNextStep }: Props) {
     <>
       <div style={{ width: 232, marginTop: 20 }}>
         <Typography.Text>
-          Type in you Social Security Number (Personnummer) below.
+          {t("Type in you Social Security Number (Personnummer) below.")}
         </Typography.Text>
       </div>
       <div style={{ margin: "40px 0" }}>
         <Input
           value={ssn}
           onChange={(e) => setSsn(e.target.value)}
-          placeholder="YYYYMMDDXXXX"
+          placeholder={t("placeholder.SSN")}
           style={{ width: 232, height: 40, textAlign: "center" }}
           onPressEnter={onSubmit}
         />
@@ -47,7 +48,7 @@ export default function ConnectViaSSN({ setNextStep }: Props) {
         block
         onClick={onSubmit}
       >
-        Connect Bank
+        {t("button.Connect Bank")}
         {isSameDevice && (
           <Image
             preview={false}

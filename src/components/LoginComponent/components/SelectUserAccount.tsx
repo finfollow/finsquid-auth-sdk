@@ -8,12 +8,14 @@ import {
 import { useEffect, useState } from "react";
 import { errorNotifier } from "utils/helpers";
 import { useLoginProvider } from "utils/state-utils";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onSuccess: () => void;
 };
 
 export default function SelectUserAccount({ onSuccess }: Props) {
+  const { t } = useTranslation();
   const [provider] = useLoginProvider();
   const [isLoading, setIsLoading] = useState(false);
   const [isSelectLoading, setIsSelectLoading] = useState(false);
@@ -86,13 +88,14 @@ export default function SelectUserAccount({ onSuccess }: Props) {
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <Typography.Text style={{ width: 250 }}>
-        You have more than one user accounts with this bank. Select which one
-        that you would like to connect.
+        {t(
+          "You have more than one user accounts with this bank. Select which one that you would like to connect."
+        )}
       </Typography.Text>
       <Select
         value={selectedAccount}
         style={{ width: 250, height: 48, marginTop: 30 }}
-        placeholder={"-- Select --"}
+        placeholder={t("placeholder.accountSelect")}
         loading={isSelectLoading}
         onChange={setSelectedAccount}
         options={useraccounts?.map((el) => ({
@@ -108,7 +111,7 @@ export default function SelectUserAccount({ onSuccess }: Props) {
         style={{ height: 40, marginTop: 50, borderRadius: 20 }}
         onClick={() => selectedAccount && selectAccount(selectedAccount)}
       >
-        Next
+        {t("button.Next")}
       </Button>
     </div>
   );

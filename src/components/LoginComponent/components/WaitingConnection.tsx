@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Button, Image, Space, Typography } from "antd";
 import Loader from "components/Loader";
 import { pollBankIdStatus } from "gateway-api/gateway-service";
+import { useTranslation } from "react-i18next";
 import { useLoginProvider } from "utils/state-utils";
 
 type Props = {
@@ -10,6 +11,7 @@ type Props = {
 };
 
 export default function WaitingConnection({ onSuccess, onRetry }: Props) {
+  const { t } = useTranslation();
   const [provider] = useLoginProvider();
   //@TODO handle this case
   if (!provider) return null;
@@ -40,14 +42,14 @@ export default function WaitingConnection({ onSuccess, onRetry }: Props) {
           alignItems: "center",
         }}
       >
-        <Typography.Text>Something went wrong.</Typography.Text>
+        <Typography.Text>{t("error.Something went wrong.")}</Typography.Text>
         <Button
           type="primary"
           block
           style={{ marginTop: 30 }}
           onClick={onRetry}
         >
-          Try again
+          {t("button.Try again")}
           <Image
             preview={false}
             style={{

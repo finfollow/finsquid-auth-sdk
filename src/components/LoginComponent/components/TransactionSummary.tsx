@@ -13,12 +13,14 @@ import useScreenSize from "utils/useScreenSize";
 import { SwapOutlined } from "@ant-design/icons";
 import BankLogo from "components/BankLogo";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onSubmit: () => void;
 };
 
 export default function TransactionSummary({ onSubmit }: Props) {
+  const { t } = useTranslation();
   const { height } = useScreenSize();
   const { xs } = Grid.useBreakpoint();
   const [isLoading, setIsLoading] = useState(false);
@@ -32,6 +34,14 @@ export default function TransactionSummary({ onSubmit }: Props) {
     setIsLoading(true);
     setTimeout(onSubmit, 1000);
   };
+
+  const columns: ColumnsType<{ type?: string; positions: Position[] }> = [
+    {
+      title: "",
+      dataIndex: "type",
+      render: (type) => <b>{t(`instrumentType.${type}`)}</b>,
+    },
+  ];
 
   return (
     <div
@@ -60,7 +70,10 @@ export default function TransactionSummary({ onSubmit }: Props) {
               textAlign: "center",
             }}
           >
-            <BankLogo src={tProvider?.iconUrl} style={{ marginBottom: 8 }} />
+            <BankLogo
+              src={tProvider?.iconUrl}
+              style={{ marginBottom: 8, width: 55, height: 55 }}
+            />
             <Typography.Text>{tProvider?.displayName}</Typography.Text>
             <Typography.Text>
               <b>{tAccount?.name}</b>
@@ -80,9 +93,9 @@ export default function TransactionSummary({ onSubmit }: Props) {
           >
             <div
               style={{
-                width: 48,
-                height: 48,
-                borderRadius: 23,
+                width: 55,
+                height: 55,
+                borderRadius: "50%",
                 border: "1px solid #D9DBE2",
                 background: "#fff",
                 display: "flex",
@@ -92,8 +105,8 @@ export default function TransactionSummary({ onSubmit }: Props) {
                 marginBottom: 8,
               }}
             >
-              <Typography.Text style={{ fontSize: 12 }}>
-                Your logo
+              <Typography.Text style={{ fontSize: 12, lineHeight: 1.1 }}>
+                {t("Your logo")}
               </Typography.Text>
             </div>
             <Typography.Text>{receivingAccount?.provider}</Typography.Text>
@@ -103,7 +116,7 @@ export default function TransactionSummary({ onSubmit }: Props) {
           </div>
         </div>
         <StyledTable
-          tableTitle="Details"
+          tableTitle={t("Details")}
           columns={columns}
           dataSource={categorizePositionsByType(tPositions)}
           style={{ cursor: "pointer", height: tableHeight }}
@@ -134,7 +147,7 @@ export default function TransactionSummary({ onSubmit }: Props) {
         />
       </div>
       <Button type={"primary"} block onClick={handleSubmit} loading={isLoading}>
-        Confirm Transfer
+        {t("button.Confirm Transfer")}
         <Image
           preview={false}
           style={{
@@ -151,11 +164,3 @@ export default function TransactionSummary({ onSubmit }: Props) {
     </div>
   );
 }
-
-const columns: ColumnsType<{ type: string; positions: Position[] }> = [
-  {
-    title: "",
-    dataIndex: "type",
-    render: (type) => <b>{type}</b>,
-  },
-];

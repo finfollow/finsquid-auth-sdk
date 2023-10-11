@@ -94,11 +94,9 @@ export const formatTypeText = (
 
 export const categorizePositionsByType = (positions?: Position[]) =>
   positions
-    ?.map((el) => formatTypeText(el.instrument.type))
+    ?.map((el) => el.instrument.type)
     .filter((el, i, array) => array.indexOf(el) === i)
     .map((type) => ({
       type,
-      positions: positions.filter(
-        (el) => formatTypeText(el.instrument.type) === type
-      ),
+      positions: positions.filter((el) => el.instrument.type === type),
     }));

@@ -1,6 +1,7 @@
 import { Button, Image } from "antd";
 import { bankIdInit } from "gateway-api/gateway-service";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { errorNotifier } from "utils/helpers";
 import {
   useConnectionSSN,
@@ -14,6 +15,7 @@ type Props = {
 };
 
 export default function OpenBankId({ onSuccess }: Props) {
+  const { t } = useTranslation();
   const [provider, setProvider] = useLoginProvider();
   const [isSameDevice] = useLoginIsSameDevice();
   const [isWithSNNConnection] = useIsLoginWithSSN();
@@ -81,7 +83,7 @@ export default function OpenBankId({ onSuccess }: Props) {
           onSuccess();
         }}
       >
-        Open BankID
+        {t("Open BankID")}
         <Image
           preview={false}
           style={{

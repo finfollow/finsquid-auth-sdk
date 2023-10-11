@@ -19,6 +19,7 @@ import RadioIcon from "../RadioIcon";
 import BankLogo from "components/BankLogo";
 import { useEffect } from "react";
 import "./styles.css";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onSubmit: () => void;
@@ -26,6 +27,7 @@ type Props = {
 };
 
 export default function SelectAccount({ onSubmit, radioBtns }: Props) {
+  const { t } = useTranslation();
   const { height } = useScreenSize();
   const { xs } = Grid.useBreakpoint();
   const [provider] = useTransferingProvider();
@@ -48,7 +50,7 @@ export default function SelectAccount({ onSubmit, radioBtns }: Props) {
 
   const columns: ColumnsType<AccountOverview> = [
     {
-      title: "Type",
+      title: t("table.Type"),
       key: "type",
       render: (_, acc) => (
         <div
@@ -69,7 +71,7 @@ export default function SelectAccount({ onSubmit, radioBtns }: Props) {
       sorter: (a, b) => tablesSort(a.type, b.type),
     },
     {
-      title: "Account",
+      title: t("table.Account"),
       key: "name",
       render: (_, acc) =>
         getNameFromTwoValues(acc.name, acc.providerAccountNumber),
@@ -80,7 +82,7 @@ export default function SelectAccount({ onSubmit, radioBtns }: Props) {
         ),
     },
     {
-      title: "Amount",
+      title: t("table.Amount"),
       dataIndex: "totalValue",
       align: "right",
       render: (m) => currencyValue(m),
@@ -89,7 +91,7 @@ export default function SelectAccount({ onSubmit, radioBtns }: Props) {
   ];
 
   if (radioBtns)
-    columns.push({
+    columns.unshift({
       title: "",
       key: "select",
       render: (_, acc) => (
@@ -116,8 +118,9 @@ export default function SelectAccount({ onSubmit, radioBtns }: Props) {
         <Space size={"middle"} style={{ padding: xs ? "0 25px" : 0 }}>
           <BankLogo src={provider?.iconUrl} />
           <Typography.Text>
-            Choose the account or individual positions that you would like to
-            transfer.
+            {t(
+              "Choose the account or individual positions that you would like to transfer."
+            )}
           </Typography.Text>
         </Space>
         <StyledTable
@@ -156,7 +159,7 @@ export default function SelectAccount({ onSubmit, radioBtns }: Props) {
           disabled={!transferingAccount}
           onClick={onSubmit}
         >
-          Next
+          {t("button.Next")}
         </Button>
       )}
     </div>

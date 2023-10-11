@@ -9,6 +9,7 @@ import {
   useLoginProvider,
 } from "utils/state-utils";
 import { errorNotifier } from "utils/helpers";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onSuccess: () => void;
@@ -16,6 +17,7 @@ type Props = {
 };
 
 export default function ScanQrCode({ onSuccess, onCancel }: Props) {
+  const { t } = useTranslation();
   const { token } = theme.useToken();
   const [ssn] = useConnectionSSN();
   const [qrCode, setQrCode] = useState("bankid");
@@ -92,9 +94,11 @@ export default function ScanQrCode({ onSuccess, onCancel }: Props) {
     <div
       style={{ display: "flex", alignItems: "center", flexDirection: "column" }}
     >
-      <Typography.Text>1. Open the BankID app in your mobile.</Typography.Text>
-      <Typography.Text>2. Click at the QR-code button.</Typography.Text>
-      <Typography.Text>3. Scan the QR-code below.</Typography.Text>
+      <Typography.Text>
+        {t("1. Open the BankID app in your mobile.")}
+      </Typography.Text>
+      <Typography.Text>{t("2. Click at the QR-code button.")}</Typography.Text>
+      <Typography.Text>{t("3. Scan the QR-code below.")}</Typography.Text>
       <div
         style={{
           margin: 40,
@@ -114,7 +118,7 @@ export default function ScanQrCode({ onSuccess, onCancel }: Props) {
         style={{ borderColor: token.colorPrimary }}
         onClick={onCancel}
       >
-        Cancel
+        {t("button.Cancel")}
       </Button>
     </div>
   );

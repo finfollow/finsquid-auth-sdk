@@ -3,12 +3,14 @@ import BankLogo from "components/BankLogo";
 import { useLoginProvider } from "utils/state-utils";
 import { StepT } from "../../constants";
 import BankIdOption from "./components/BankIdOption";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   setNextStep: (step: StepT) => void;
 };
 
 export default function LoginOptions({ setNextStep }: Props) {
+  const { t } = useTranslation();
   const [provider] = useLoginProvider();
 
   return (
@@ -21,8 +23,9 @@ export default function LoginOptions({ setNextStep }: Props) {
         <BankLogo src={provider?.iconUrl} style={{ width: 100, height: 100 }} />
         <div style={{ width: 220, textAlign: "center", marginTop: 20 }}>
           <Typography.Text>
-            Connect your bank accounts with BankID and find all account
-            information.
+            {t(
+              "Connect your bank accounts with BankID and find all account information."
+            )}
           </Typography.Text>
         </div>
       </Space>

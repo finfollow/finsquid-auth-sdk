@@ -1,0 +1,74 @@
+{
+  "title": {
+    "Connect Bank": "Connect Bank",
+    "Scan QR-code": "Scan QR-code",
+    "Waiting for authentication": "Waiting for authentication",
+    "Connecting bank": "Connecting bank",
+    "Bank successfully connected!": "Bank successfully connected!",
+    "Select Account": "Select Account",
+    "Select Positions": "Select Positions",
+    "Receiving Account": "Receiving Account",
+    "Summary": "Summary"
+  },
+  "stepper": {
+    "Connect Bank": "Connect Bank",
+    "Select Account": "Select Account",
+    "Confirm Transfer": "Confirm Transfer"
+  },
+  "button": {
+    "Connect Bank": "Connect Bank",
+    "Cancel": "Cancel",
+    "Try again": "Try again",
+    "Next": "Next",
+    "Done": "Done",
+    "Add Bank": "Add Bank",
+    "Select all": "Select all",
+    "Unselect all": "Unselect all",
+    "Confirm Transfer": "Confirm Transfer",
+    "Back to start": "Back to start"
+  },
+  "placeholder": {
+    "SSN": "YYYYMMDDXXXX",
+    "accountSelect": "-- Select --"
+  },
+  "table": {
+    "Type": "Type",
+    "Account": "Account",
+    "Amount": "Amount"
+  },
+  "instrumentType": {
+    "STOCK": "Stock",
+    "FUND": "Fund",
+    "ETF": "ETF",
+    "CERTIFICATE": "Certificate",
+    "OTHER": "Other"
+  },
+  "error": {
+    "Something went wrong.": "Something went wrong.",
+    "There is no session ID or account ID": "There is no session ID or account ID"
+  },
+  "Connect your bank accounts with BankID and find all account information.": "Connect your bank accounts with BankID and find all account information.",
+  "Same Device": "Same Device",
+  "Other Device": "Other Device",
+  "Type in you Social Security Number (Personnummer) below.": "Type in you Social Security Number (Personnummer) below.",
+  "Open BankID": "Open BankID",
+  "1. Open the BankID app in your mobile.": "1. Open the BankID app in your mobile.",
+  "2. Click at the QR-code button.": "2. Click at the QR-code button.",
+  "3. Scan the QR-code below.": "3. Scan the QR-code below.",
+  "You have more than one user accounts with this bank. Select which one that you would like to connect.": "You have more than one user accounts with this bank. Select which one that you would like to connect.",
+  "SuccessConnect": {
+    "account": "account",
+    "was successfully connected": "was successfully connected",
+    "accounts": "accounts",
+    "were successfully connected": "were successfully connected",
+    "from your bank!": "from your bank!"
+  },
+  "Choose the account or individual positions that you would like to transfer.": "Choose the account or individual positions that you would like to transfer.",
+  "Select which positions that you would like to transfer.": "Select which positions that you would like to transfer.",
+  "Bank": "Bank:",
+  "Account": "Account:",
+  "Select to which account you’d like to transfer your positions. You can only transfer to the same account type as you have your positions currently.": "Select to which account you’d like to transfer your positions. You can only transfer to the same account type as you have your positions currently.",
+  "Your logo": "Your logo",
+  "Details": "Details",
+  "Thank you": "Thank you!"
+}

@@ -9,6 +9,7 @@ import { Button, Space, Typography, theme } from "antd";
 import { useEffect } from "react";
 import Loader from "components/Loader";
 import { errorNotifier } from "utils/helpers";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onBack: () => void;
@@ -16,6 +17,7 @@ type Props = {
 };
 
 export default function SuccessConnect({ onSubmit, onBack }: Props) {
+  const { t } = useTranslation();
   const { token } = theme.useToken();
   const searchParams = new URLSearchParams(document.location.search);
   const [provider, setProvider] = useLoginProvider();
@@ -72,12 +74,17 @@ export default function SuccessConnect({ onSubmit, onBack }: Props) {
     <>
       <Space direction="vertical" style={{ alignItems: "center", gap: 0 }}>
         <Typography.Text style={{ fontWeight: "bold" }}>
-          {accountsNumber} {isPluralAccounts ? "accounts" : "account"}
+          {accountsNumber}{" "}
+          {isPluralAccounts
+            ? t("SuccessConnect.accounts")
+            : t("SuccessConnect.account")}
         </Typography.Text>
         <Typography.Text>
-          {isPluralAccounts ? "were" : "was"} successfully connected
+          {isPluralAccounts
+            ? t("SuccessConnect.were successfully connected")
+            : t("SuccessConnect.was successfully connected")}
         </Typography.Text>
-        <Typography.Text>from your bank!</Typography.Text>
+        <Typography.Text>{t("SuccessConnect.from your bank!")}</Typography.Text>
       </Space>
       <Space direction="vertical" style={{ marginTop: 50 }}>
         {!onSubmit && (
@@ -86,7 +93,7 @@ export default function SuccessConnect({ onSubmit, onBack }: Props) {
             style={{ borderColor: token.colorPrimary }}
             onClick={onBack}
           >
-            Add Bank
+            {t("button.Add Bank")}
           </Button>
         )}
         <Button
@@ -94,7 +101,7 @@ export default function SuccessConnect({ onSubmit, onBack }: Props) {
           block
           onClick={() => (onSubmit ? onSubmit() : handleSubmit())}
         >
-          Done
+          {t("button.Done")}
         </Button>
       </Space>
     </>

@@ -1,4 +1,5 @@
 import { Button, Space, Typography } from "antd";
+import { useTranslation } from "react-i18next";
 import {
   useLoginProvider,
   useReceivingAccount,
@@ -12,6 +13,7 @@ type Props = {
 };
 
 export default function FinalResult({ onSubmit }: Props) {
+  const { t } = useTranslation();
   const searchParams = new URLSearchParams(document.location.search);
   const redirectLink = searchParams.get("redirect");
   const [_p, setLoginProvider] = useLoginProvider();
@@ -33,7 +35,7 @@ export default function FinalResult({ onSubmit }: Props) {
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <Typography.Title>Thank you!</Typography.Title>
+      <Typography.Title>{t("Thank you")}</Typography.Title>
       <Space direction="vertical" style={{ marginTop: 200 }}>
         {!!redirectLink && (
           <Button
@@ -49,7 +51,7 @@ export default function FinalResult({ onSubmit }: Props) {
           block
           onClick={handleSubmit}
         >
-          Back to start
+          {t("button.Back to start")}
         </Button>
       </Space>
     </div>

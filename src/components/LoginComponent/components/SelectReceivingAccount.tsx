@@ -19,12 +19,14 @@ import {
 } from "utils/state-utils";
 import BankLogo from "components/BankLogo";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onSubmit: () => void;
 };
 
 export default function SelectReceivingAccount({ onSubmit }: Props) {
+  const { t } = useTranslation();
   const { height } = useScreenSize();
   const { xs } = Grid.useBreakpoint();
   const [provider] = useTransferingProvider();
@@ -46,7 +48,19 @@ export default function SelectReceivingAccount({ onSubmit }: Props) {
 
   const columns: ColumnsType<AccountOverview> = [
     {
-      title: "Type",
+      title: "",
+      key: "select",
+      render: (_, acc) => (
+        <RadioIcon
+          selected={
+            acc.providerAccountId === receivingAccount?.providerAccountId
+          }
+          disabled={transferingAccount?.type !== acc.type}
+        />
+      ),
+    },
+    {
+      title: t("table.Type"),
       key: "type",
       render: (_, acc) => (
         <div
@@ -67,7 +81,7 @@ export default function SelectReceivingAccount({ onSubmit }: Props) {
       sorter: (a, b) => tablesSort(a.type, b.type),
     },
     {
-      title: "Account",
+      title: t("table.Account"),
       key: "name",
       render: (_, acc) =>
         getNameFromTwoValues(acc.name, acc.providerAccountNumber),
@@ -78,23 +92,11 @@ export default function SelectReceivingAccount({ onSubmit }: Props) {
         ),
     },
     {
-      title: "Amount",
+      title: t("table.Amount"),
       dataIndex: "totalValue",
       align: "right",
       render: (m) => currencyValue(m),
       sorter: (a, b) => tablesSort(a.totalValue?.amt, b.totalValue?.amt),
-    },
-    {
-      title: "",
-      key: "select",
-      render: (_, acc) => (
-        <RadioIcon
-          selected={
-            acc.providerAccountId === receivingAccount?.providerAccountId
-          }
-          disabled={transferingAccount?.type !== acc.type}
-        />
-      ),
     },
   ];
 
@@ -112,9 +114,9 @@ export default function SelectReceivingAccount({ onSubmit }: Props) {
         <Space size={"middle"} style={{ padding: xs ? "0 25px" : 0 }}>
           <BankLogo src={provider?.iconUrl} />
           <Typography.Text>
-            Select to which account you’d like to transfer your positions. You
-            can only transfer to the same account type as you have your
-            positions currently.
+            {t(
+              "Select to which account you’d like to transfer your positions. You can only transfer to the same account type as you have your positions currently."
+            )}
           </Typography.Text>
         </Space>
         <StyledTable
@@ -140,7 +142,7 @@ export default function SelectReceivingAccount({ onSubmit }: Props) {
         disabled={!receivingAccount}
         onClick={onSubmit}
       >
-        Next
+        {t("button.Next")}
       </Button>
     </div>
   );

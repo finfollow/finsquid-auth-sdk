@@ -1,5 +1,6 @@
 import { Button, Image, Space, theme } from "antd";
 import { StepT, steps } from "components/LoginComponent/constants";
+import { useTranslation } from "react-i18next";
 import { useLoginIsSameDevice, useIsLoginWithSSN } from "utils/state-utils";
 
 export default function BankIdOption({
@@ -9,6 +10,7 @@ export default function BankIdOption({
   setNextStep: (step: StepT) => void;
   withSSN?: boolean;
 }) {
+  const { t } = useTranslation();
   const { token } = theme.useToken();
   const [_, setIsSameDevice] = useLoginIsSameDevice();
   const [_ssn, setIsWithSNN] = useIsLoginWithSSN();
@@ -24,7 +26,7 @@ export default function BankIdOption({
   return (
     <Space direction="vertical">
       <Button type="primary" block onClick={() => onSubmit(true)}>
-        Same Device
+        {t("Same Device")}
         <Image
           preview={false}
           style={{
@@ -43,7 +45,7 @@ export default function BankIdOption({
         style={{ borderColor: token.colorPrimary }}
         onClick={() => onSubmit(false)}
       >
-        Other Device
+        {t("Other Device")}
       </Button>
     </Space>
   );
