@@ -118,9 +118,7 @@ export default function SelectAccount({ onSubmit, radioBtns }: Props) {
         <Space size={"middle"} style={{ padding: xs ? "0 25px" : 0 }}>
           <BankLogo src={provider?.iconUrl} />
           <Typography.Text>
-            {t(
-              "Choose the account or individual positions that you would like to transfer."
-            )}
+            {t("Choose which account you would like to transfer.")}
           </Typography.Text>
         </Space>
         <StyledTable

@@ -6,29 +6,29 @@
     "Connecting bank": "Ansluter bank",
     "Bank successfully connected!": "Banken har anslutits!",
     "Select Account": "Välj konto",
-    "Select Positions": "Välj positioner",
+    "Select Positions": "Välj innehav",
     "Receiving Account": "Mottagande konto",
     "Summary": "Sammanfattning"
   },
   "stepper": {
     "Connect Bank": "Anslut Bank",
     "Select Account": "Välj konto",
-    "Confirm Transfer": "Bekräfta överföring"
+    "Confirm Transfer": "Bekräfta flytt"
   },
   "button": {
     "Connect Bank": "Anslut Bank",
-    "Cancel": "Annullera",
+    "Cancel": "Avbryt",
     "Try again": "Försök igen",
     "Next": "Nästa",
-    "Done": "Gjort",
+    "Done": "Klar",
     "Add Bank": "Lägg till bank",
     "Select all": "Välj alla",
     "Unselect all": "Avmarkera alla",
-    "Confirm Transfer": "Bekräfta överföring",
+    "Confirm Transfer": "Bekräfta flytt",
     "Back to start": "Tillbaka till start"
   },
   "placeholder": {
-    "SSN": "ÅÅÅÅMMDDXXXX",
+    "SSN": "YYYYMMDDXXXX",
     "accountSelect": "-- Välj --"
   },
   "table": {
@@ -37,11 +37,11 @@
     "Amount": "Belopp"
   },
   "instrumentType": {
-    "STOCK": "Stock",
+    "STOCK": "Aktie",
     "FUND": "Fond",
     "ETF": "ETF",
     "CERTIFICATE": "Certifikat",
-    "OTHER": "Övrig"
+    "OTHER": "Övrigt"
   },
   "error": {
     "Something went wrong.": "Något gick fel.",
@@ -55,19 +55,19 @@
   "1. Open the BankID app in your mobile.": "1. Öppna BankID-appen i din mobil.",
   "2. Click at the QR-code button.": "2. Klicka på QR-kodknappen.",
   "3. Scan the QR-code below.": "3. Skanna QR-koden nedan.",
-  "You have more than one user accounts with this bank. Select which one that you would like to connect.": "Du har mer än ett användarkonto hos den här banken. Välj vilken du vill ansluta.",
+  "You have more than one user accounts with this bank. Select which one that you would like to connect.": "Du har mer än ett användarkonto hos den här banken. Välj vilket du vill ansluta.",
   "SuccessConnect": {
-    "account": "kontot",
+    "account": "konto",
     "was successfully connected": "har anslutits",
     "accounts": "konton",
-    "were successfully connected": "kopplades",
+    "were successfully connected": "har anslutits",
     "from your bank!": "från din bank!"
   },
-  "Choose the account or individual positions that you would like to transfer.": "Välj kontot eller enskilda positioner som du vill överföra.",
-  "Select which positions that you would like to transfer.": "Välj vilka positioner du vill överföra.",
+  "Choose which account you would like to transfer.": "Välj vilket konto du vill flytta.",
+  "Select which positions that you would like to transfer.": "Välj vilka innehav du vill flytta",
   "Bank": "Bank:",
   "Account": "Konto:",
-  "Select to which account you’d like to transfer your positions. You can only transfer to the same account type as you have your positions currently.": "Välj vilket konto du vill överföra dina positioner till. Du kan bara överföra till samma kontotyp som du har dina positioner för närvarande.",
+  "Select to which account you’d like to transfer your positions. You can only transfer to the same account type as you have your positions currently.": "Välj vilket konto du vill flytta dina innehav till. Du kan bara överföra till samma kontotyp som du har ditt innehav på för närvarande.",
   "Your logo": "Din logotyp",
   "Details": "Detaljer",
   "Thank you": "Tack!"
