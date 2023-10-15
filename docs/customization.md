@@ -23,6 +23,29 @@ const themeParams = encodeURIComponent(JSON.stringify(theme));
 Append the URL parameter `theme` to your `authentication link`.
 
 ```js
-const AUTH_LINK = authSdkLink + `/?api_key=${apiKey}&theme=${themeParams}`
-<iframe src={AUTH_LINK} />
+const AUTH_LINK = authSdkLink + `/?api_key=${apiKey}&theme=${themeParams}`;
 ```
+
+```html
+<iframe src="{AUTH_LINK}" />;
+```
+
+### Radio buttons option
+
+Lists looks as below by default:
+
+![Lists appearance](04.png)
+
+You can change the lists appearance appending URL parameter `radio-buttons=true` to your `authentication link`.
+
+```js
+const AUTH_LINK = authSdkLink + `/?api_key=${apiKey}&radio-buttons=true`;
+```
+
+```html
+<iframe src="{AUTH_LINK}" />;
+```
+
+Lists will look as below:
+
+![Lists appearance](05.png)

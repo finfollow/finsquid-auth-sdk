@@ -1,8 +1,6 @@
 ---
-id: getting-started
+id: index
 ---
-
-[**Finsquid Auth for web**](./index.md)
 
 - [Getting Started](./getting-started.md)
 - [Customization](./customization.md)

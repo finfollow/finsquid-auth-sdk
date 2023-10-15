@@ -10,6 +10,8 @@ You can change the language appending URL parameter `lang=sv` to your `authentic
 // lang values - 'en' or 'sv'
 const lang = "en";
 const AUTH_LINK = authSdkLink + `/?api_key=${apiKey}&lang=${lang}`;
+```
 
-<iframe src={AUTH_LINK} />;
+```html
+<iframe src="{AUTH_LINK}" />;
 ```

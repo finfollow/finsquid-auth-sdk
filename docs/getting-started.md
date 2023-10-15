@@ -15,13 +15,16 @@ First you need to get `Auth SDK link` and `api key` from [Finsquid](https://www.
 Add the `authentication link` as the `src` parameter of an `<iframe>` HTML element.
 
 ```js
-const AUTH_LINK = authSdkLink + `/?api_key=${apiKey}`
-<iframe src={AUTH_LINK} />
+const AUTH_LINK = authSdkLink + `/?api_key=${apiKey}`;
+```
+
+```html
+<iframe src="{AUTH_LINK}" />;
 ```
 
 An iframe will by default be 300px wide and 150px tall. To allow the iframe to seamlessly adapt its size to the containing element, make sure to apply appropriate sizing either by css or inline-styles. Using the width attribute will give the iframe a static width, which is not recommended when targeting mobile devices.
 
-```js
+```html
 <!–– ❌ not recommended for mobile devices ––>
 <iframe src="{AUTH_LINK}" width="400" />
 
