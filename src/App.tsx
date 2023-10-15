@@ -40,6 +40,11 @@ function App() {
           colorBgLayout: "#F5F7FE",
           ...clientTheme,
         },
+        components: {
+          Button: {
+            ...clientTheme,
+          },
+        },
       }}
       locale={lang === "en" ? enUS : svSE}
     >

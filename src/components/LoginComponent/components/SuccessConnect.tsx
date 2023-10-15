@@ -37,7 +37,10 @@ export default function SuccessConnect({ onSubmit, onBack }: Props) {
       setConnectedProviders((prev) => [...prev, provider as ProviderT]);
       setProvider(null);
       if (window.parent) {
-        window.parent.postMessage(provider, "*");
+        window.parent.postMessage(
+          JSON.stringify({ type: "success", data: provider, error: null }),
+          "*"
+        );
       }
     }
   }, [data?.accounts]);

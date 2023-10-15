@@ -2,18 +2,8 @@
 id: getting-started
 ---
 
-**Introduction**
+[**Finsquid Auth for web**](./index.md)
 
-- [Introduction](./Readme.md#introduction)
-- [UX versus security](./Readme.md#ux-versus-security)
-- [PIN versus password](./Readme.md#pin-versus-password)
-
-**Integration Tutorials**
-
-- [iOS Applications](./Platform-iOS.md)
-- [Android Applications](./Platform-Android.md)
-
-**Contact & License**
-
-- [License information](./Readme.md#license)
-- [Contact information](./Readme.md#contact)
+- [Getting Started](./getting-started.md)
+- [Customization](./customization.md)
+- [Localization](./localization.md)
