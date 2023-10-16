@@ -2,7 +2,7 @@
 
 You can change theme colors such as:
 
-![Color customization](02.png)
+![Color customization](./images/02.png)
 
 Declaring theme object and encoding it as a URI component.
 
@@ -34,7 +34,7 @@ const AUTH_LINK = authSdkLink + `/?api_key=${apiKey}&theme=${themeParams}`;
 
 Lists looks as below by default:
 
-![Lists appearance](04.png)
+![Lists appearance](./images/04.png)
 
 You can change the lists appearance appending URL parameter `radio-buttons=true` to your `authentication link`.
 
@@ -48,4 +48,4 @@ const AUTH_LINK = authSdkLink + `/?api_key=${apiKey}&radio-buttons=true`;
 
 Lists will look as below:
 
-![Lists appearance](05.png)
+![Lists appearance](./images/05.png)
