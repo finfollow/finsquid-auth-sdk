@@ -1,3 +1,9 @@
+---
+layout: default
+title: Localization
+nav_order: 4
+---
+
 # Localization
 
 Finsquid Auth SDK supports English and Swedish languages:

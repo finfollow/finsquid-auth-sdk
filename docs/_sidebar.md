@@ -1,3 +1,0 @@
-- [Getting Started](./getting-started.md)
-- [Customization](./customization.md)
-- [Localization](./localization.md)

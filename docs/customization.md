@@ -1,3 +1,9 @@
+---
+layout: default
+title: Customization
+nav_order: 3
+---
+
 # Customization
 
 You can change theme colors such as:
