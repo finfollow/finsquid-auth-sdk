@@ -60,7 +60,7 @@ export default function WaitingConnection({ onSuccess, onRetry }: Props) {
               top: -25,
               left: 10,
             }}
-            src="BankID_logo_white.svg"
+            src="bankID_logo_white.svg"
           />
         </Button>
       </div>

@@ -94,7 +94,7 @@ export default function OpenBankId({ onSuccess }: Props) {
             top: -25,
             left: 20,
           }}
-          src="BankID_logo_white.svg"
+          src="bankID_logo_white.svg"
         />
       </Button>
     </div>
