@@ -34,7 +34,7 @@ An iframe will by default be 300px wide and 150px tall. To allow the iframe to s
 
 ### 3. Add a listener to your app
 
-All communication between an iframed Tink Link and the parent host is done via postMessage. Register a listener to start receiving messages. How you do this is up to you, but the code below shows the basics.
+All communication between an iframed Finsquid Auth and the parent host is done via postMessage. Register a listener to start receiving messages. How you do this is up to you, but the code below shows the basics.
 
 ```js
 window.addEventListener("message", handlePostMessage);
@@ -85,4 +85,4 @@ Go through the authentication inside the integrated iframe flow. If all is succe
 
 ## Reference
 
-If you integrate Tink Link in your application via an `iframe`, the result will be delivered as stringified JSON object via `postMessage` to the parent window.
+If you integrate Finsquid Auth in your application via an `iframe`, the result will be delivered as stringified JSON object via `postMessage` to the parent window.
