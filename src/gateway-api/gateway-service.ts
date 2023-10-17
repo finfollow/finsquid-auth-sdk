@@ -13,7 +13,9 @@ import { useQuery } from "@tanstack/react-query";
 import { dummyReceivingAccounts } from "components/LoginComponent/constants";
 
 const httpClient = axiosInstance;
-const url = process.env.REACT_APP_GATEWAY_URL || "http://localhost:8787";
+const apiUrl = new URLSearchParams(document.location.search).get("api_url");
+const url =
+  apiUrl || process.env.REACT_APP_GATEWAY_URL || "http://localhost:8787";
 
 export function useProviders() {
   return useQuery<Provider[]>({
