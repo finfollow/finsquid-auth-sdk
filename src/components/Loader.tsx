@@ -22,7 +22,7 @@ export default function Loader({
       }}
     >
       <Image
-        src="/FinSquid_icon.svg"
+        src="/finSquid_icon.svg"
         alt="Finsquid"
         preview={false}
         style={{
