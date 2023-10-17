@@ -4,7 +4,7 @@ layout: default
 
 # Finsquid Auth SDK for Web
 
-Finsquid Auth is our front-end web SDK for account authentication.
+Auth SDK is our front-end web SDK for account authentication.
 
 ![ Auth SDK Preview ](./images/01.png)
 
