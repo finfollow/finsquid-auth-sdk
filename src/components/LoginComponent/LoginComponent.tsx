@@ -61,6 +61,7 @@ export default function ConnectAccount({ type, radioBtns }: Props) {
       )}
       {step.value === "scanQRcode" && (
         <ScanQrCode
+          setNextStep={nextStep}
           onSuccess={() => nextStep(steps.selectUserAccount)}
           onCancel={() => step.prevStep && nextStep(steps[step.prevStep])}
         />

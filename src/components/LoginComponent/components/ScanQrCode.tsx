@@ -10,13 +10,19 @@ import {
 } from "utils/state-utils";
 import { errorNotifier } from "utils/helpers";
 import { useTranslation } from "react-i18next";
+import { StepT, steps } from "../constants";
 
 type Props = {
+  setNextStep: (step: StepT) => void;
   onSuccess: () => void;
   onCancel: () => void;
 };
 
-export default function ScanQrCode({ onSuccess, onCancel }: Props) {
+export default function ScanQrCode({
+  setNextStep,
+  onSuccess,
+  onCancel,
+}: Props) {
   const { t } = useTranslation();
   const { token } = theme.useToken();
   const [ssn] = useConnectionSSN();
@@ -48,6 +54,9 @@ export default function ScanQrCode({ onSuccess, onCancel }: Props) {
         setQrStatus("active");
         if (bankIdStatusPulling.isFetchedAfterMount)
           bankIdStatusPulling.refetch();
+      } else if (!res.imageChallengeData && res.sid && isWithSNNConnection) {
+        setProvider({ ...provider, sid: res.sid });
+        setNextStep(steps.waitingConnection);
       } else throw "There is no qr code data or session id";
     } catch (err) {
       console.error("bankIdInit error:", err);
