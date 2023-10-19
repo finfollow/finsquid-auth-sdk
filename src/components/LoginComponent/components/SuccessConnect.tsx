@@ -10,6 +10,8 @@ import { useEffect } from "react";
 import Loader from "components/Loader";
 import { errorNotifier } from "utils/helpers";
 import { useTranslation } from "react-i18next";
+import CardContentWrapper from "components/CardContentWrapper";
+import CardTitle from "components/CardTitle";
 
 type Props = {
   onBack: () => void;
@@ -64,17 +66,31 @@ export default function SuccessConnect({ onSubmit, onBack }: Props) {
 
   if (isFetching) {
     return (
-      <Space
-        direction="vertical"
-        style={{ alignItems: "center", marginTop: 100 }}
+      <div
+        style={{
+          display: "flex",
+          flexGrow: 1,
+          flexDirection: "column",
+        }}
       >
-        <Loader />
-      </Space>
+        <CardTitle text="Bank successfully connected!" />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexGrow: 1,
+          }}
+        >
+          <Loader />
+        </div>
+      </div>
     );
   }
 
   return (
-    <>
+    <CardContentWrapper>
+      <CardTitle text="Bank successfully connected!" />
       <Space direction="vertical" style={{ alignItems: "center", gap: 0 }}>
         <Typography.Text style={{ fontWeight: "bold" }}>
           {accountsNumber}{" "}
@@ -107,6 +123,6 @@ export default function SuccessConnect({ onSubmit, onBack }: Props) {
           {t("button.Done")}
         </Button>
       </Space>
-    </>
+    </CardContentWrapper>
   );
 }

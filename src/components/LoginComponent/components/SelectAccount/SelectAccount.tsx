@@ -14,12 +14,13 @@ import {
   useTransferingAccount,
   useTransferingProvider,
 } from "utils/state-utils";
-import useScreenSize from "utils/useScreenSize";
 import RadioIcon from "../RadioIcon";
 import BankLogo from "components/BankLogo";
 import { useEffect } from "react";
 import "./styles.css";
 import { useTranslation } from "react-i18next";
+import CardContentWrapper from "components/CardContentWrapper";
+import CardTitle from "components/CardTitle";
 
 type Props = {
   onSubmit: () => void;
@@ -28,7 +29,6 @@ type Props = {
 
 export default function SelectAccount({ onSubmit, radioBtns }: Props) {
   const { t } = useTranslation();
-  const { height } = useScreenSize();
   const { xs } = Grid.useBreakpoint();
   const [provider] = useTransferingProvider();
   const [transferingAccount, setTransferingAccount] = useTransferingAccount();
@@ -105,61 +105,59 @@ export default function SelectAccount({ onSubmit, radioBtns }: Props) {
     });
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexGrow: 1,
-        flexDirection: "column",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
-      <div>
-        <Space size={"middle"} style={{ padding: xs ? "0 25px" : 0 }}>
-          <BankLogo src={provider?.iconUrl} />
-          <Typography.Text>
-            {t("Choose which account you would like to transfer.")}
-          </Typography.Text>
-        </Space>
-        <StyledTable
-          loading={isFetching}
-          columns={columns}
-          dataSource={data?.accounts || []}
-          rowKey={(acc) => acc.providerAccountId as string}
-          style={{ cursor: "pointer" }}
-          containerStyle={{ marginTop: 20, borderRadius: xs ? 0 : 10 }}
-          onRow={(acc) => ({
-            onClick: () => {
-              if (isTransferableAccount(acc.type)) {
-                if (radioBtns)
-                  setTransferingAccount((prev) =>
-                    prev?.providerAccountId === acc.providerAccountId
-                      ? null
-                      : acc
-                  );
-                else {
-                  setTransferingAccount(acc);
-                  onSubmit();
+    <>
+      <CardTitle text="Select Account" />
+      <CardContentWrapper>
+        <div style={{ width: "100%" }}>
+          <Space size={"middle"} style={{ padding: xs ? "0 25px" : 0 }}>
+            <BankLogo src={provider?.iconUrl} />
+            <Typography.Text>
+              {t("Choose which account you would like to transfer.")}
+            </Typography.Text>
+          </Space>
+          <StyledTable
+            loading={isFetching}
+            columns={columns}
+            dataSource={data?.accounts || []}
+            rowKey={(acc) => acc.providerAccountId as string}
+            style={{ cursor: "pointer" }}
+            containerStyle={{ marginTop: 20, borderRadius: xs ? 0 : 10 }}
+            onRow={(acc) => ({
+              onClick: () => {
+                if (isTransferableAccount(acc.type)) {
+                  if (radioBtns)
+                    setTransferingAccount((prev) =>
+                      prev?.providerAccountId === acc.providerAccountId
+                        ? null
+                        : acc
+                    );
+                  else {
+                    setTransferingAccount(acc);
+                    onSubmit();
+                  }
                 }
-              }
-            },
-          })}
-          rowClassName={(acc) =>
-            !radioBtns && !isTransferableAccount(acc.type) ? "disabled-row" : ""
-          }
-          scroll={{ x: true, y: xs ? height * 0.4 : 400 }}
-        />
-      </div>
-      {radioBtns && (
-        <Button
-          type="primary"
-          block
-          disabled={!transferingAccount}
-          onClick={onSubmit}
-        >
-          {t("button.Next")}
-        </Button>
-      )}
-    </div>
+              },
+            })}
+            rowClassName={(acc) =>
+              !radioBtns && !isTransferableAccount(acc.type)
+                ? "disabled-row"
+                : ""
+            }
+            // scroll={{ x: true, y: xs ? height * 0.4 : 400 }}
+          />
+        </div>
+        {radioBtns && (
+          <Button
+            type="primary"
+            block
+            disabled={!transferingAccount}
+            onClick={onSubmit}
+            style={{ marginTop: 30 }}
+          >
+            {t("button.Next")}
+          </Button>
+        )}
+      </CardContentWrapper>
+    </>
   );
 }

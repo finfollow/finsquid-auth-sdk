@@ -1,4 +1,5 @@
 import { Button, Space, Typography } from "antd";
+import CardContentWrapper from "components/CardContentWrapper";
 import { useTranslation } from "react-i18next";
 import {
   useLoginProvider,
@@ -32,9 +33,7 @@ export default function FinalResult({ onSubmit }: Props) {
   };
 
   return (
-    <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
+    <CardContentWrapper>
       <Typography.Title>{t("Thank you")}</Typography.Title>
       <Space direction="vertical" style={{ marginTop: 200 }}>
         {!!redirectLink && (
@@ -54,6 +53,6 @@ export default function FinalResult({ onSubmit }: Props) {
           {t("button.Back to start")}
         </Button>
       </Space>
-    </div>
+    </CardContentWrapper>
   );
 }

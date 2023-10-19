@@ -11,6 +11,8 @@ import {
 import { errorNotifier } from "utils/helpers";
 import { useTranslation } from "react-i18next";
 import { StepT, steps } from "../constants";
+import CardTitle from "components/CardTitle";
+import CardContentWrapper from "components/CardContentWrapper";
 
 type Props = {
   setNextStep: (step: StepT) => void;
@@ -100,27 +102,36 @@ export default function ScanQrCode({
   ]);
 
   return (
-    <div
-      style={{ display: "flex", alignItems: "center", flexDirection: "column" }}
-    >
-      <Typography.Text>
-        {t("1. Open the BankID app in your mobile.")}
-      </Typography.Text>
-      <Typography.Text>{t("2. Click at the QR-code button.")}</Typography.Text>
-      <Typography.Text>{t("3. Scan the QR-code below.")}</Typography.Text>
+    <CardContentWrapper>
+      <CardTitle text="Scan QR-code" />
       <div
         style={{
-          margin: 40,
-          background: token.colorBgContainer,
-          borderRadius: 8,
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
         }}
       >
-        <QRCode
-          value={qrCode}
-          status={qrStatus}
-          style={{ background: token.colorBgContainer }}
-          onRefresh={init}
-        />
+        <Typography.Text>
+          {t("1. Open the BankID app in your mobile.")}
+        </Typography.Text>
+        <Typography.Text>
+          {t("2. Click at the QR-code button.")}
+        </Typography.Text>
+        <Typography.Text>{t("3. Scan the QR-code below.")}</Typography.Text>
+        <div
+          style={{
+            margin: 40,
+            background: token.colorBgContainer,
+            borderRadius: 8,
+          }}
+        >
+          <QRCode
+            value={qrCode}
+            status={qrStatus}
+            style={{ background: token.colorBgContainer }}
+            onRefresh={init}
+          />
+        </div>
       </div>
       <Button
         block
@@ -129,6 +140,6 @@ export default function ScanQrCode({
       >
         {t("button.Cancel")}
       </Button>
-    </div>
+    </CardContentWrapper>
   );
 }

@@ -1,4 +1,6 @@
 import { Button, Image } from "antd";
+import CardContentWrapper from "components/CardContentWrapper";
+import CardTitle from "components/CardTitle";
 import { bankIdInit } from "gateway-api/gateway-service";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -62,13 +64,8 @@ export default function OpenBankId({ onSuccess }: Props) {
   const isAndroid = /Android/i.test(navigator.userAgent);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-      }}
-    >
+    <CardContentWrapper>
+      <CardTitle text="Connect Bank" />
       <Button
         type={"primary"}
         loading={isLoading}
@@ -97,6 +94,6 @@ export default function OpenBankId({ onSuccess }: Props) {
           src="bankID_logo_white.svg"
         />
       </Button>
-    </div>
+    </CardContentWrapper>
   );
 }

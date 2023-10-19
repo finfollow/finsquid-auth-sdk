@@ -8,9 +8,8 @@ import {
   transformAccountType,
 } from "utils/helpers";
 import RadioIcon from "./RadioIcon";
-import { Button, Grid, Space, Typography } from "antd";
+import { Button, Grid, Space, Typography, theme } from "antd";
 import StyledTable from "components/StyledTable";
-import useScreenSize from "utils/useScreenSize";
 import { useReceivingAccounts } from "gateway-api/gateway-service";
 import {
   useReceivingAccount,
@@ -20,6 +19,8 @@ import {
 import BankLogo from "components/BankLogo";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import CardContentWrapper from "components/CardContentWrapper";
+import CardTitle from "components/CardTitle";
 
 type Props = {
   onSubmit: () => void;
@@ -27,7 +28,7 @@ type Props = {
 
 export default function SelectReceivingAccount({ onSubmit }: Props) {
   const { t } = useTranslation();
-  const { height } = useScreenSize();
+  const { token } = theme.useToken();
   const { xs } = Grid.useBreakpoint();
   const [provider] = useTransferingProvider();
   const [transferingAccount] = useTransferingAccount();
@@ -101,49 +102,45 @@ export default function SelectReceivingAccount({ onSubmit }: Props) {
   ];
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexGrow: 1,
-        flexDirection: "column",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
-      <div>
-        <Space size={"middle"} style={{ padding: xs ? "0 25px" : 0 }}>
-          <BankLogo src={provider?.iconUrl} />
-          <Typography.Text>
-            {t(
-              "Select to which account you’d like to transfer your positions. You can only transfer to the same account type as you have your positions currently."
-            )}
-          </Typography.Text>
-        </Space>
-        <StyledTable
-          loading={isFetching}
-          columns={columns}
-          dataSource={data?.accounts || []}
-          rowKey={(acc) => acc.providerAccountId as string}
-          style={{ cursor: "pointer" }}
-          containerStyle={{ marginTop: 20, borderRadius: xs ? 0 : 10 }}
-          onRow={(acc) => ({
-            onClick: () =>
-              transferingAccount?.type === acc.type &&
-              setReceivingAccount((prev) =>
-                prev?.providerAccountId === acc.providerAccountId ? null : acc
-              ),
-          })}
-          scroll={{ x: true, y: xs ? height * 0.4 : 400 }}
-        />
-      </div>
-      <Button
-        type="primary"
-        block
-        disabled={!receivingAccount}
-        onClick={onSubmit}
-      >
-        {t("button.Next")}
-      </Button>
-    </div>
+    <>
+      <CardTitle text="Receiving Account" />
+      <CardContentWrapper>
+        <div style={{ width: "100%" }}>
+          <Space size={"middle"} style={{ padding: xs ? "0 25px" : 0 }}>
+            <BankLogo src={provider?.iconUrl} />
+            <Typography.Text>
+              {t(
+                "Select to which account you’d like to transfer your positions. You can only transfer to the same account type as you have your positions currently."
+              )}
+            </Typography.Text>
+          </Space>
+          <StyledTable
+            loading={isFetching}
+            columns={columns}
+            dataSource={data?.accounts || []}
+            rowKey={(acc) => acc.providerAccountId as string}
+            style={{ cursor: "pointer" }}
+            containerStyle={{ marginTop: 20, borderRadius: xs ? 0 : 10 }}
+            onRow={(acc) => ({
+              onClick: () =>
+                transferingAccount?.type === acc.type &&
+                setReceivingAccount((prev) =>
+                  prev?.providerAccountId === acc.providerAccountId ? null : acc
+                ),
+            })}
+            // scroll={{ x: true, y: xs ? height * 0.4 : 400 }}
+          />
+        </div>
+        <Button
+          type="primary"
+          block
+          disabled={!receivingAccount}
+          style={{ marginTop: 30, borderColor: token.colorPrimary }}
+          onClick={onSubmit}
+        >
+          {t("button.Next")}
+        </Button>
+      </CardContentWrapper>
+    </>
   );
 }

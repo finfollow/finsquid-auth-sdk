@@ -2,6 +2,7 @@ import { List, Space, Typography } from "antd";
 import RadioIcon from "./RadioIcon";
 import BankLogo from "components/BankLogo";
 import { Provider } from "gateway-api/types";
+import { RightOutlined } from "@ant-design/icons";
 
 export default function BankListItem({
   item,
@@ -13,12 +14,23 @@ export default function BankListItem({
   onClick: () => void;
 }) {
   return (
-    <List.Item style={{ cursor: "pointer" }} onClick={onClick}>
-      <Space>
-        <BankLogo src={item.iconUrl} />
-        <Typography.Text>{item?.displayName}</Typography.Text>
+    <List.Item
+      style={{ cursor: "pointer", paddingLeft: 0, paddingRight: 5 }}
+      onClick={onClick}
+    >
+      <Space size="middle">
+        <BankLogo src={item.iconUrl} size={50} />
+        <Typography.Text style={{ fontSize: 16 }}>
+          <b>{item?.displayName}</b>
+        </Typography.Text>
       </Space>
-      {selected !== undefined && <RadioIcon selected={selected} />}
+      <div style={{ marginLeft: 15 }}>
+        {selected !== undefined ? (
+          <RadioIcon selected={selected} />
+        ) : (
+          <RightOutlined style={{ fontSize: 12 }} />
+        )}
+      </div>
     </List.Item>
   );
 }

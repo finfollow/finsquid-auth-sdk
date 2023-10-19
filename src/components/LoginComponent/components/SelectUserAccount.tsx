@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 import { errorNotifier } from "utils/helpers";
 import { useLoginProvider } from "utils/state-utils";
 import { useTranslation } from "react-i18next";
+import CardContentWrapper from "components/CardContentWrapper";
+import CardTitle from "components/CardTitle";
 
 type Props = {
   onSuccess: () => void;
@@ -75,34 +77,48 @@ export default function SelectUserAccount({ onSuccess }: Props) {
 
   if (isLoading)
     return (
-      <Space
-        direction="vertical"
-        style={{ alignItems: "center", marginTop: 100 }}
+      <div
+        style={{
+          display: "flex",
+          flexGrow: 1,
+          flexDirection: "column",
+        }}
       >
-        <Loader />
-      </Space>
+        <CardTitle text="Connect Bank" />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexGrow: 1,
+          }}
+        >
+          <Loader />
+        </div>
+      </div>
     );
 
   return (
-    <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
-      <Typography.Text style={{ width: 250 }}>
-        {t(
-          "You have more than one user accounts with this bank. Select which one that you would like to connect."
-        )}
-      </Typography.Text>
-      <Select
-        value={selectedAccount}
-        style={{ width: 250, height: 48, marginTop: 30 }}
-        placeholder={t("placeholder.accountSelect")}
-        loading={isSelectLoading}
-        onChange={setSelectedAccount}
-        options={useraccounts?.map((el) => ({
-          value: el.accountId,
-          label: el.accountName,
-        }))}
-      />
+    <CardContentWrapper>
+      <CardTitle text="Connect Bank" />
+      <div style={{ width: 250 }}>
+        <Typography.Text>
+          {t(
+            "You have more than one user accounts with this bank. Select which one that you would like to connect."
+          )}
+        </Typography.Text>
+        <Select
+          value={selectedAccount}
+          style={{ width: 250, height: 48, marginTop: 30 }}
+          placeholder={t("placeholder.accountSelect")}
+          loading={isSelectLoading}
+          onChange={setSelectedAccount}
+          options={useraccounts?.map((el) => ({
+            value: el.accountId,
+            label: el.accountName,
+          }))}
+        />
+      </div>
       <Button
         type="primary"
         block
@@ -113,6 +129,6 @@ export default function SelectUserAccount({ onSuccess }: Props) {
       >
         {t("button.Next")}
       </Button>
-    </div>
+    </CardContentWrapper>
   );
 }

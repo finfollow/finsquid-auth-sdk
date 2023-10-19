@@ -19,7 +19,6 @@ export type StepsT = Record<
 >;
 
 export type StepT = {
-  title?: string;
   wrapperStep: StepsEnum;
   value: keyof StepsT;
   prevStep: keyof StepsT | null;
@@ -27,73 +26,61 @@ export type StepT = {
 
 export const steps: StepsT = {
   selectProvider: {
-    title: "Connect Bank",
     value: "selectProvider",
     wrapperStep: StepsEnum["ConnectBank"],
     prevStep: null,
   },
   loginOptions: {
-    title: "Connect Bank",
     value: "loginOptions",
     wrapperStep: StepsEnum["ConnectBank"],
     prevStep: "selectProvider",
   },
   provideSSN: {
-    title: "Connect Bank",
     value: "provideSSN",
     wrapperStep: StepsEnum["ConnectBank"],
     prevStep: "loginOptions",
   },
   scanQRcode: {
-    title: "Scan QR-code",
     value: "scanQRcode",
     wrapperStep: StepsEnum["ConnectBank"],
     prevStep: "loginOptions",
   },
   openBankID: {
-    title: "Connect Bank",
     value: "openBankID",
     wrapperStep: StepsEnum["ConnectBank"],
     prevStep: "loginOptions",
   },
   waitingConnection: {
-    title: "Waiting for authentication",
     value: "waitingConnection",
     wrapperStep: StepsEnum["ConnectBank"],
     prevStep: "loginOptions",
   },
   selectUserAccount: {
-    title: "Connecting bank",
     value: "selectUserAccount",
     wrapperStep: StepsEnum["ConnectBank"],
     prevStep: "loginOptions",
   },
   successConnect: {
-    title: "Bank successfully connected!",
     value: "successConnect",
     wrapperStep: StepsEnum["ConnectBank"],
     prevStep: "selectProvider",
   },
   selectAccount: {
-    title: "Select Account",
     value: "selectAccount",
     wrapperStep: StepsEnum["SelectAccount"],
     prevStep: "loginOptions",
   },
   selectPositions: {
-    title: "Select Positions",
     value: "selectPositions",
     wrapperStep: StepsEnum["SelectAccount"],
     prevStep: "selectAccount",
   },
   selectReceivingAccount: {
-    title: "Receiving Account",
     value: "selectReceivingAccount",
     wrapperStep: StepsEnum["SelectAccount"],
     prevStep: "selectPositions",
   },
   transactionSummary: {
-    title: "Summary",
     value: "transactionSummary",
     wrapperStep: StepsEnum["ConfirmTransfer"],
     prevStep: "selectReceivingAccount",

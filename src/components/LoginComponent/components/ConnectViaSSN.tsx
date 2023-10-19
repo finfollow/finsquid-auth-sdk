@@ -7,6 +7,8 @@ import {
 import { StepT, steps } from "../constants";
 import Personnummer from "personnummer";
 import { useTranslation } from "react-i18next";
+import CardContentWrapper from "components/CardContentWrapper";
+import CardTitle from "components/CardTitle";
 
 type Props = {
   setNextStep: React.Dispatch<React.SetStateAction<StepT>>;
@@ -27,20 +29,23 @@ export default function ConnectViaSSN({ setNextStep }: Props) {
   };
 
   return (
-    <>
-      <div style={{ width: 232, marginTop: 20 }}>
-        <Typography.Text>
-          {t("Type in you Social Security Number (Personnummer) below.")}
-        </Typography.Text>
-      </div>
-      <div style={{ margin: "40px 0" }}>
-        <Input
-          value={ssn}
-          onChange={(e) => setSsn(e.target.value)}
-          placeholder={t("placeholder.SSN")}
-          style={{ width: 232, height: 40, textAlign: "center" }}
-          onPressEnter={onSubmit}
-        />
+    <CardContentWrapper>
+      <CardTitle text="Connect Bank" />
+      <div>
+        <div style={{ width: 232, marginTop: 20 }}>
+          <Typography.Text>
+            {t("Type in you Social Security Number (Personnummer) below.")}
+          </Typography.Text>
+        </div>
+        <div style={{ margin: "40px 0" }}>
+          <Input
+            value={ssn}
+            onChange={(e) => setSsn(e.target.value)}
+            placeholder={t("placeholder.SSN")}
+            style={{ width: 232, height: 40, textAlign: "center" }}
+            onPressEnter={onSubmit}
+          />
+        </div>
       </div>
       <Button
         type={"primary"}
@@ -64,6 +69,6 @@ export default function ConnectViaSSN({ setNextStep }: Props) {
           />
         )}
       </Button>
-    </>
+    </CardContentWrapper>
   );
 }

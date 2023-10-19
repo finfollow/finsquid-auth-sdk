@@ -14,10 +14,11 @@ import {
   useTransferingPrositions,
   useTransferingProvider,
 } from "utils/state-utils";
-import useScreenSize from "utils/useScreenSize";
 import RadioIcon from "./RadioIcon";
 import BankLogo from "components/BankLogo";
 import { useTranslation } from "react-i18next";
+import CardContentWrapper from "components/CardContentWrapper";
+import CardTitle from "components/CardTitle";
 
 type Props = {
   onSubmit: () => void;
@@ -26,7 +27,6 @@ type Props = {
 export default function SelectPositions({ onSubmit }: Props) {
   const { t } = useTranslation();
   const { token } = theme.useToken();
-  const { height } = useScreenSize();
   const { xs } = Grid.useBreakpoint();
   const [transferingPositions, setTransferingPositions] =
     useTransferingPrositions();
@@ -65,16 +65,9 @@ export default function SelectPositions({ onSubmit }: Props) {
   ];
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexGrow: 1,
-        flexDirection: "column",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
-      <div>
+    <CardContentWrapper>
+      <CardTitle text="Select Positions" />
+      <div style={{ width: "100%" }}>
         <Space size={"middle"} style={{ padding: xs ? "0 25px" : 0 }}>
           <BankLogo src={provider?.iconUrl} />
           <Typography.Text>
@@ -155,9 +148,9 @@ export default function SelectPositions({ onSubmit }: Props) {
             ...el,
             key: index.toString(),
           }))}
-          style={{ cursor: "pointer", height: xs ? height * 0.4 : 400 }}
+          style={{ cursor: "pointer" /* height: xs ? height * 0.4 : 400 */ }}
           containerStyle={{ marginTop: 20, borderRadius: xs ? 0 : 10 }}
-          scroll={{ x: true, y: xs ? height * 0.4 : 400 }}
+          // scroll={{ x: true, y: xs ? height * 0.4 : 400 }}
           expandable={{
             expandedRowRender: (record) => {
               const columns: ColumnsType<Position> = [
@@ -217,11 +210,11 @@ export default function SelectPositions({ onSubmit }: Props) {
         type="primary"
         block
         disabled={!transferingPositions.length}
-        style={{ borderColor: token.colorPrimary }}
+        style={{ marginTop: 30, borderColor: token.colorPrimary }}
         onClick={onSubmit}
       >
         {t("button.Next")}
       </Button>
-    </div>
+    </CardContentWrapper>
   );
 }
