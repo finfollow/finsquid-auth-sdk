@@ -7,7 +7,7 @@ import { useEffect, useMemo } from "react";
 import {
   categorizePositionsByType,
   currencyValue,
-  errorNotifier,
+  sendPostMessage,
 } from "utils/helpers";
 import {
   useTransferingAccount,
@@ -46,13 +46,12 @@ export default function SelectPositions({ onSubmit }: Props) {
 
   useEffect(() => {
     if (error)
-      errorNotifier({
-        description: (
-          <pre>
-            Fetch positions error:{"\n"}
-            {JSON.stringify(error, null, 2)}
-          </pre>
-        ),
+      sendPostMessage({
+        type: "error",
+        error: {
+          type: t("error.Account positions fetch error"),
+          message: error,
+        },
       });
   }, [error]);
 

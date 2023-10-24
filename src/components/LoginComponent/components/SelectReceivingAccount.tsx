@@ -2,8 +2,8 @@ import { ColumnsType } from "antd/es/table";
 import { AccountOverview } from "gateway-api/types";
 import {
   currencyValue,
-  errorNotifier,
   getNameFromTwoValues,
+  sendPostMessage,
   tablesSort,
   transformAccountType,
 } from "utils/helpers";
@@ -37,13 +37,12 @@ export default function SelectReceivingAccount({ onSubmit }: Props) {
 
   useEffect(() => {
     if (error)
-      errorNotifier({
-        description: (
-          <pre>
-            Fetch receiving accounts error:{"\n"}
-            {JSON.stringify(error, null, 2)}
-          </pre>
-        ),
+      sendPostMessage({
+        type: "error",
+        error: {
+          type: t("error.Receiving accounts fetch error"),
+          message: error,
+        },
       });
   }, [error]);
 
