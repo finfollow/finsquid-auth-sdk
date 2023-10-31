@@ -45,7 +45,15 @@
   },
   "error": {
     "Something went wrong.": "Something went wrong.",
-    "There is no session ID or account ID": "There is no session ID or account ID"
+    "There is no session ID or account ID": "There is no session ID or account ID",
+    "Bank init error": "Bank init error",
+    "Bank id status pulling error": "Bank id status pulling error",
+    "Account positions fetch error": "Account positions fetch error",
+    "Providers fetch error": "Providers fetch error",
+    "Receiving accounts fetch error": "Receiving accounts fetch error",
+    "User accounts fetch error": "User accounts fetch error",
+    "Select user account error": "Select user account error",
+    "Accounts fetch error": "Accounts fetch error"
   },
   "Connect your bank accounts with BankID and find all account information.": "Connect your bank accounts with BankID and find all account information.",
   "Same Device": "Same Device",

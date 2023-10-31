@@ -5,6 +5,7 @@ import CardTitle from "components/CardTitle";
 import Loader from "components/Loader";
 import { pollBankIdStatus } from "gateway-api/gateway-service";
 import { useTranslation } from "react-i18next";
+import { sendPostMessage } from "utils/helpers";
 import { useLoginProvider } from "utils/state-utils";
 
 type Props = {
@@ -32,6 +33,15 @@ export default function WaitingConnection({
         onSuccess();
       }
       return data?.status == "pending" ? 1000 : false;
+    },
+    onError: (error) => {
+      sendPostMessage({
+        type: "error",
+        error: {
+          type: t("error.Bank id status pulling error"),
+          message: error,
+        },
+      });
     },
     enabled: !!provider?.sid,
   });

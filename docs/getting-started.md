@@ -31,10 +31,10 @@ const AUTH_LINK = authSdkLink + `/?api_key=${apiKey}`;
 An iframe will by default be 300px wide and 150px tall. To allow the iframe to seamlessly adapt its size to the containing element, make sure to apply appropriate sizing either by css or inline-styles. Using the width attribute will give the iframe a static width, which is not recommended when targeting mobile devices.
 
 ```html
-<!–– ❌ not recommended for mobile devices ––>
+<!-- ❌ not recommended for mobile devices -->
 <iframe src="{AUTH_LINK}" width="400" />
 
-<!–– ✅ adapt to the size of the parent element ––>
+<!-- ✅ adapt to the size of the parent element -->
 <iframe src="{AUTH_LINK}" style="width:100%;" />
 ```
 
@@ -56,7 +56,7 @@ const handlePostMessage = (event: any) => {
   } else if (type === "error") {
     // Handle error response from Auth SDK
     console.log(
-      `Auth SDK returned with error status: ${error.status} and error message: ${error.message}.`
+      `Auth SDK returned with error type: ${error.type} and error message: ${error.message}.`
     );
   }
 };

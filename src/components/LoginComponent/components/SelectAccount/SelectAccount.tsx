@@ -5,8 +5,8 @@ import { AccountOverview, AccountType } from "gateway-api/types";
 import { useAccounts } from "gateway-api/gateway-service";
 import {
   currencyValue,
-  errorNotifier,
   getNameFromTwoValues,
+  sendPostMessage,
   tablesSort,
   transformAccountType,
 } from "utils/helpers";
@@ -38,13 +38,9 @@ export default function SelectAccount({ onSubmit, radioBtns }: Props) {
 
   useEffect(() => {
     if (error)
-      errorNotifier({
-        description: (
-          <pre>
-            Fetch accounts error:{"\n"}
-            {JSON.stringify(error, null, 2)}
-          </pre>
-        ),
+      sendPostMessage({
+        type: "error",
+        error: { type: t("error.Accounts fetch error"), message: error },
       });
   }, [error]);
 

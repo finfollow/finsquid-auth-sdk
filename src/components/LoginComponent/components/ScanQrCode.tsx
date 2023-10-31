@@ -8,7 +8,7 @@ import {
   useLoginIsSameDevice,
   useLoginProvider,
 } from "utils/state-utils";
-import { errorNotifier } from "utils/helpers";
+import { sendPostMessage } from "utils/helpers";
 import { useTranslation } from "react-i18next";
 import { StepT, steps } from "../constants";
 import CardTitle from "components/CardTitle";
@@ -43,6 +43,7 @@ export default function ScanQrCode({
 
   const init = async () => {
     if (!provider.name) return;
+    setQrStatus("loading");
     try {
       const res = await bankIdInit(
         provider.name,
@@ -60,16 +61,13 @@ export default function ScanQrCode({
         setProvider({ ...provider, sid: res.sid });
         setNextStep(steps.waitingConnection);
       } else throw "There is no qr code data or session id";
-    } catch (err) {
-      console.error("bankIdInit error:", err);
-      errorNotifier({
-        description: (
-          <pre>
-            Fetch accounts error:{"\n"}
-            {JSON.stringify(err, null, 2)}
-          </pre>
-        ),
+    } catch (error) {
+      console.error("bankIdInit error:", error);
+      sendPostMessage({
+        type: "error",
+        error: { type: t("error.Bank init error"), message: error },
       });
+      setQrStatus("expired");
     }
   };
 
@@ -84,7 +82,16 @@ export default function ScanQrCode({
       }
       return data?.status == "pending" ? 1000 : false;
     },
-    onError: () => setQrStatus("expired"),
+    onError: (error) => {
+      setQrStatus("expired");
+      sendPostMessage({
+        type: "error",
+        error: {
+          type: t("error.Bank id status pulling error"),
+          message: error,
+        },
+      });
+    },
     enabled: !!sid,
   });
 

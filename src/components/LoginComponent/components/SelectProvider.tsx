@@ -5,7 +5,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import { useLoginProvider } from "utils/state-utils";
 import { useProviders } from "gateway-api/gateway-service";
 import { Provider } from "gateway-api/types";
-import { errorNotifier, tablesSort } from "utils/helpers";
+import { sendPostMessage, tablesSort } from "utils/helpers";
 import { useTranslation } from "react-i18next";
 import CardTitle from "components/CardTitle";
 
@@ -37,13 +37,9 @@ export default function SelectProvider({ onSubmit, radioBtns }: Props) {
 
   useEffect(() => {
     if (error)
-      errorNotifier({
-        description: (
-          <pre>
-            Fetch Providers error:{"\n"}
-            {JSON.stringify(error, null, 2)}
-          </pre>
-        ),
+      sendPostMessage({
+        type: "error",
+        error: { type: t("error.Providers fetch error"), message: error },
       });
   }, [error]);
 

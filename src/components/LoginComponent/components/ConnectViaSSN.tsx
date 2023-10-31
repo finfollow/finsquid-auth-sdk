@@ -42,7 +42,7 @@ export default function ConnectViaSSN({ setNextStep }: Props) {
             value={ssn}
             onChange={(e) => setSsn(e.target.value)}
             placeholder={t("placeholder.SSN")}
-            style={{ width: 232, height: 40, textAlign: "center" }}
+            style={{ width: 232, height: 40 }}
             onPressEnter={onSubmit}
           />
         </div>
