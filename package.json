@@ -26,10 +26,9 @@
   },
   "scripts": {
     "start": "cross-env DISABLE_ESLINT_PLUGIN=true PORT=3001 refine start",
-    "build-dev": "git checkout master && git pull && DISABLE_ESLINT_PLUGIN=true env-cmd -f .env.development refine build && wrangler pages deploy --project-name finsquid-auth-sdk-dev --branch master ./build",
-    "build-stage": "git checkout staging && git pull && DISABLE_ESLINT_PLUGIN=true env-cmd -f .env.staging refine build && wrangler pages deploy --project-name finsquid-auth-sdk-staging --branch staging ./build",
-    "build-prod": "git checkout production && git pull && DISABLE_ESLINT_PLUGIN=true env-cmd -f .env.production refine build && wrangler pages deploy --project-name finsquid-auth-sdk --branch production ./build",
-    "build": "cross-env DISABLE_ESLINT_PLUGIN=true env-cmd -f .env.production refine build",
+    "build-development": "cross-env DISABLE_ESLINT_PLUGIN=true env-cmd -f .env.development refine build",
+    "build-staging": "cross-env DISABLE_ESLINT_PLUGIN=true env-cmd -f .env.staging refine build",
+    "build-production": "cross-env DISABLE_ESLINT_PLUGIN=true env-cmd -f .env.production refine build",
     "eject": "react-scripts eject",
     "refine": "refine"
   },
