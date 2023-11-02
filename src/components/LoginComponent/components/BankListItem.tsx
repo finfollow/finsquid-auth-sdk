@@ -1,7 +1,7 @@
 import { List, Space, Typography } from "antd";
 import RadioIcon from "./RadioIcon";
-import BankLogo from "components/BankLogo";
-import { Provider } from "gateway-api/types";
+import BankLogo from "src/components/BankLogo";
+import { Provider } from "src/gateway-api/types";
 import { RightOutlined } from "@ant-design/icons";
 
 export default function BankListItem({

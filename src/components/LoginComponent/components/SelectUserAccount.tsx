@@ -1,16 +1,16 @@
-import { Button, Select, Space, Typography } from "antd";
-import Loader from "components/Loader";
-import { UserAccount } from "gateway-api/types";
+import { Button, Select, Typography } from "antd";
+import Loader from "src/components/Loader";
+import { UserAccount } from "src/gateway-api/types";
 import {
   getUserAccounts,
   selectUserAccount,
-} from "gateway-api/gateway-service";
+} from "src/gateway-api/gateway-service";
 import { useEffect, useState } from "react";
-import { sendPostMessage } from "utils/helpers";
-import { useLoginProvider } from "utils/state-utils";
+import { sendPostMessage } from "src/utils/helpers";
+import { useLoginProvider } from "src/utils/state-utils";
 import { useTranslation } from "react-i18next";
-import CardContentWrapper from "components/CardContentWrapper";
-import CardTitle from "components/CardTitle";
+import CardContentWrapper from "src/components/CardContentWrapper";
+import CardTitle from "src/components/CardTitle";
 
 type Props = {
   onSuccess: () => void;

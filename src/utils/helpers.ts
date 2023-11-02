@@ -5,7 +5,7 @@ import {
   Money,
   Position,
   TransactionType,
-} from "gateway-api/types";
+} from "src/gateway-api/types";
 
 export const currencyValue = (
   m: Money | null | undefined,

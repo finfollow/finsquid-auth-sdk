@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import dataProvider, { axiosInstance } from "@refinedev/simple-rest";
-import LoginComponent from "components/LoginComponent";
+import LoginComponent from "src/components/LoginComponent";
 import { Refine } from "@refinedev/core";
-import { LoginComponentType } from "components/LoginComponent/LoginComponent";
+import { LoginComponentType } from "src/components/LoginComponent/LoginComponent";
 import { ConfigProvider, theme } from "antd";
 import "@refinedev/antd/dist/reset.css";
 import "./i18n";

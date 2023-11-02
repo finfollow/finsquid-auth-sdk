@@ -1,5 +1,5 @@
 import { Button, Space, Typography } from "antd";
-import CardContentWrapper from "components/CardContentWrapper";
+import CardContentWrapper from "src/components/CardContentWrapper";
 import { useTranslation } from "react-i18next";
 import {
   useLoginProvider,
@@ -7,7 +7,7 @@ import {
   useTransferingAccount,
   useTransferingPrositions,
   useTransferingProvider,
-} from "utils/state-utils";
+} from "src/utils/state-utils";
 
 type Props = {
   onSubmit: () => void;

@@ -1,17 +1,17 @@
-import { useAccounts } from "gateway-api/gateway-service";
+import { useAccounts } from "src/gateway-api/gateway-service";
 import {
   ProviderT,
   useConnectedProviders,
   useLoginProvider,
   useTransferingProvider,
-} from "utils/state-utils";
+} from "src/utils/state-utils";
 import { Button, Space, Typography, theme } from "antd";
 import { useEffect } from "react";
-import Loader from "components/Loader";
-import { sendPostMessage } from "utils/helpers";
+import Loader from "src/components/Loader";
+import { sendPostMessage } from "src/utils/helpers";
 import { useTranslation } from "react-i18next";
-import CardContentWrapper from "components/CardContentWrapper";
-import CardTitle from "components/CardTitle";
+import CardContentWrapper from "src/components/CardContentWrapper";
+import CardTitle from "src/components/CardTitle";
 
 type Props = {
   onBack: () => void;

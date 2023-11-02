@@ -1,7 +1,7 @@
 import { Button, Image, Space, theme } from "antd";
-import { StepT, steps } from "components/LoginComponent/constants";
+import { StepT, steps } from "src/components/LoginComponent/constants";
 import { useTranslation } from "react-i18next";
-import { useLoginIsSameDevice, useIsLoginWithSSN } from "utils/state-utils";
+import { useLoginIsSameDevice, useIsLoginWithSSN } from "src/utils/state-utils";
 
 export default function BankIdOption({
   setNextStep,

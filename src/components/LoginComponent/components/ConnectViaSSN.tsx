@@ -3,15 +3,16 @@ import {
   useConnectionSSN,
   useLoginIsSameDevice,
   useLoginProvider,
-} from "utils/state-utils";
+} from "src/utils/state-utils";
 import { StepT, steps } from "../constants";
 import Personnummer from "personnummer";
 import { useTranslation } from "react-i18next";
-import CardContentWrapper from "components/CardContentWrapper";
-import CardTitle from "components/CardTitle";
+import CardContentWrapper from "src/components/CardContentWrapper";
+import CardTitle from "src/components/CardTitle";
+import { StateUpdater } from "preact/hooks";
 
 type Props = {
-  setNextStep: React.Dispatch<React.SetStateAction<StepT>>;
+  setNextStep: StateUpdater<StepT>;
 };
 
 export default function ConnectViaSSN({ setNextStep }: Props) {
@@ -40,7 +41,9 @@ export default function ConnectViaSSN({ setNextStep }: Props) {
         <div style={{ margin: "40px 0" }}>
           <Input
             value={ssn}
-            onChange={(e) => setSsn(e.target.value)}
+            onChange={({ target }: { target: HTMLInputElement }) =>
+              setSsn(target.value)
+            }
             placeholder={t("placeholder.SSN")}
             style={{ width: 232, height: 40 }}
             onPressEnter={onSubmit}

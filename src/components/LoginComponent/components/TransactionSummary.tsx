@@ -1,20 +1,20 @@
 import { Button, Grid, Image, Typography, theme } from "antd";
 import { ColumnsType } from "antd/es/table";
-import StyledTable from "components/StyledTable";
-import { Position } from "gateway-api/types";
-import { categorizePositionsByType, currencyValue } from "utils/helpers";
+import StyledTable from "src/components/StyledTable";
+import { Position } from "src/gateway-api/types";
+import { categorizePositionsByType, currencyValue } from "src/utils/helpers";
 import {
   useReceivingAccount,
   useTransferingAccount,
   useTransferingPrositions,
   useTransferingProvider,
-} from "utils/state-utils";
+} from "src/utils/state-utils";
 import { SwapOutlined } from "@ant-design/icons";
-import BankLogo from "components/BankLogo";
+import BankLogo from "src/components/BankLogo";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import CardTitle from "components/CardTitle";
-import CardContentWrapper from "components/CardContentWrapper";
+import CardTitle from "src/components/CardTitle";
+import CardContentWrapper from "src/components/CardContentWrapper";
 
 type Props = {
   onSubmit: () => void;

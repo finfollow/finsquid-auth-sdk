@@ -14,6 +14,7 @@ import SelectReceivingAccount from "./components/SelectReceivingAccount";
 import TransactionSummary from "./components/TransactionSummary";
 import OpenBankID from "./components/OpenBankID";
 import FinalResult from "./components/FinalResult";
+import { StateUpdater } from "preact/hooks";
 
 type Props = {
   type: LoginComponentType;
@@ -25,7 +26,7 @@ export type LoginComponentType = "connect" | "transfer";
 export default function ConnectAccount({ type, radioBtns }: Props) {
   const [step, setStep] = useState<StepT>(steps.selectProvider);
 
-  const nextStep: React.Dispatch<React.SetStateAction<StepT>> = (_step) => {
+  const nextStep: StateUpdater<StepT> = (_step) => {
     window.scrollTo(0, 0);
     setStep(_step);
   };

@@ -2,12 +2,12 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { Button, Grid, Input, List, theme } from "antd";
 import BankListItem from "./BankListItem";
 import { SearchOutlined } from "@ant-design/icons";
-import { useLoginProvider } from "utils/state-utils";
-import { useProviders } from "gateway-api/gateway-service";
-import { Provider } from "gateway-api/types";
-import { sendPostMessage, tablesSort } from "utils/helpers";
+import { useLoginProvider } from "src/utils/state-utils";
+import { useProviders } from "src/gateway-api/gateway-service";
+import { Provider } from "src/gateway-api/types";
+import { sendPostMessage, tablesSort } from "src/utils/helpers";
 import { useTranslation } from "react-i18next";
-import CardTitle from "components/CardTitle";
+import CardTitle from "src/components/CardTitle";
 
 type Props = {
   onSubmit: () => void;
@@ -28,10 +28,10 @@ export default function SelectProvider({ onSubmit, radioBtns }: Props) {
     );
   }, [data]);
 
-  const handleSearch = (e: ChangeEvent<HTMLInputElement>) =>
+  const handleSearch = ({ target }: { target: HTMLInputElement }) =>
     setBanks(
       (data || []).filter((el) =>
-        el.displayName?.toLowerCase().includes(e.target.value.toLowerCase())
+        el.displayName?.toLowerCase().includes(target.value.toLowerCase())
       )
     );
 

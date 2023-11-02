@@ -10,12 +10,12 @@ import {
   UserAccount,
 } from "./types";
 import { useQuery } from "@tanstack/react-query";
-import { dummyReceivingAccounts } from "components/LoginComponent/constants";
+import { dummyReceivingAccounts } from "src/components/LoginComponent/constants";
 
 const httpClient = axiosInstance;
 const apiUrl = new URLSearchParams(document.location.search).get("api_url");
 const url =
-  apiUrl || process.env.REACT_APP_GATEWAY_URL || "http://localhost:8787";
+  apiUrl || import.meta.env.VITE_GATEWAY_URL || "http://localhost:8787";
 
 export function useProviders() {
   return useQuery<Provider[]>({

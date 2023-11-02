@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { AccountOverview, Position, Provider } from "gateway-api/types";
+import { AccountOverview, Position, Provider } from "src/gateway-api/types";
 
 export interface SetGlobalState<T> {
   (state: T | ((prevState: T) => T)): void;

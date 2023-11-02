@@ -1,26 +1,26 @@
 import { ColumnsType } from "antd/es/table";
-import { AccountOverview } from "gateway-api/types";
+import { AccountOverview } from "src/gateway-api/types";
 import {
   currencyValue,
   getNameFromTwoValues,
   sendPostMessage,
   tablesSort,
   transformAccountType,
-} from "utils/helpers";
+} from "src/utils/helpers";
 import RadioIcon from "./RadioIcon";
 import { Button, Grid, Space, Typography, theme } from "antd";
-import StyledTable from "components/StyledTable";
-import { useReceivingAccounts } from "gateway-api/gateway-service";
+import StyledTable from "src/components/StyledTable";
+import { useReceivingAccounts } from "src/gateway-api/gateway-service";
 import {
   useReceivingAccount,
   useTransferingAccount,
   useTransferingProvider,
-} from "utils/state-utils";
-import BankLogo from "components/BankLogo";
+} from "src/utils/state-utils";
+import BankLogo from "src/components/BankLogo";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import CardContentWrapper from "components/CardContentWrapper";
-import CardTitle from "components/CardTitle";
+import CardContentWrapper from "src/components/CardContentWrapper";
+import CardTitle from "src/components/CardTitle";
 
 type Props = {
   onSubmit: () => void;

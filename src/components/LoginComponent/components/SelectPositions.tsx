@@ -1,24 +1,24 @@
 import { Button, Grid, Space, Typography, theme } from "antd";
 import { ColumnsType } from "antd/es/table";
-import StyledTable from "components/StyledTable";
-import { Position } from "gateway-api/types";
-import { useAccountPositions } from "gateway-api/gateway-service";
+import StyledTable from "src/components/StyledTable";
+import { Position } from "src/gateway-api/types";
+import { useAccountPositions } from "src/gateway-api/gateway-service";
 import { useEffect, useMemo } from "react";
 import {
   categorizePositionsByType,
   currencyValue,
   sendPostMessage,
-} from "utils/helpers";
+} from "src/utils/helpers";
 import {
   useTransferingAccount,
   useTransferingPrositions,
   useTransferingProvider,
-} from "utils/state-utils";
+} from "src/utils/state-utils";
 import RadioIcon from "./RadioIcon";
-import BankLogo from "components/BankLogo";
+import BankLogo from "src/components/BankLogo";
 import { useTranslation } from "react-i18next";
-import CardContentWrapper from "components/CardContentWrapper";
-import CardTitle from "components/CardTitle";
+import CardContentWrapper from "src/components/CardContentWrapper";
+import CardTitle from "src/components/CardTitle";
 
 type Props = {
   onSubmit: () => void;

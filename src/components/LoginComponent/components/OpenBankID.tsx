@@ -1,16 +1,16 @@
 import { Button, Image, theme } from "antd";
-import CardContentWrapper from "components/CardContentWrapper";
-import CardTitle from "components/CardTitle";
-import { bankIdInit } from "gateway-api/gateway-service";
+import CardContentWrapper from "src/components/CardContentWrapper";
+import CardTitle from "src/components/CardTitle";
+import { bankIdInit } from "src/gateway-api/gateway-service";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { sendPostMessage } from "utils/helpers";
+import { sendPostMessage } from "src/utils/helpers";
 import {
   useConnectionSSN,
   useIsLoginWithSSN,
   useLoginIsSameDevice,
   useLoginProvider,
-} from "utils/state-utils";
+} from "src/utils/state-utils";
 
 type Props = {
   onSuccess: () => void;

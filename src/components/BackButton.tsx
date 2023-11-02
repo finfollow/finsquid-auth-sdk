@@ -1,7 +1,10 @@
 import { LeftOutlined } from "@ant-design/icons";
 import { Button, Grid } from "antd";
+import { ButtonProps } from "antd/lib";
 
-type Props = React.HTMLAttributes<HTMLDivElement> & { size?: number };
+type Props = Omit<ButtonProps & React.RefAttributes<HTMLElement>, "size"> & {
+  size?: number;
+};
 
 export default function BackButton({ size = 18, ...props }: Props) {
   const { xs } = Grid.useBreakpoint();

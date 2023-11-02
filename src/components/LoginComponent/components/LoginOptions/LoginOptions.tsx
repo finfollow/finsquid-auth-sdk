@@ -1,11 +1,11 @@
 import { Grid, Space, Typography } from "antd";
-import BankLogo from "components/BankLogo";
-import { useLoginProvider } from "utils/state-utils";
+import BankLogo from "src/components/BankLogo";
+import { useLoginProvider } from "src/utils/state-utils";
 import { StepT } from "../../constants";
 import BankIdOption from "./components/BankIdOption";
 import { useTranslation } from "react-i18next";
-import CardTitle from "components/CardTitle";
-import CardContentWrapper from "components/CardContentWrapper";
+import CardTitle from "src/components/CardTitle";
+import CardContentWrapper from "src/components/CardContentWrapper";
 
 type Props = {
   setNextStep: (step: StepT) => void;

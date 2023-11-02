@@ -1,5 +1,5 @@
 import { StepsEnum } from "./components/Wrapper";
-import { AccountOverview, ProviderName } from "gateway-api/types";
+import { AccountOverview, ProviderName } from "src/gateway-api/types";
 
 export type StepsT = Record<
   | "selectProvider"

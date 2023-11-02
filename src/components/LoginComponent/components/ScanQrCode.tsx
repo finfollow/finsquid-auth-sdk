@@ -1,18 +1,18 @@
 import { Button, QRCode, QRCodeProps, Typography, theme } from "antd";
 import { useEffect, useState } from "react";
-import { bankIdInit, pollBankIdStatus } from "gateway-api/gateway-service";
+import { bankIdInit, pollBankIdStatus } from "src/gateway-api/gateway-service";
 import { useQuery } from "@tanstack/react-query";
 import {
   useConnectionSSN,
   useIsLoginWithSSN,
   useLoginIsSameDevice,
   useLoginProvider,
-} from "utils/state-utils";
-import { sendPostMessage } from "utils/helpers";
+} from "src/utils/state-utils";
+import { sendPostMessage } from "src/utils/helpers";
 import { useTranslation } from "react-i18next";
 import { StepT, steps } from "../constants";
-import CardTitle from "components/CardTitle";
-import CardContentWrapper from "components/CardContentWrapper";
+import CardTitle from "src/components/CardTitle";
+import CardContentWrapper from "src/components/CardContentWrapper";
 
 type Props = {
   setNextStep: (step: StepT) => void;

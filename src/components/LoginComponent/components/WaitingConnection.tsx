@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { Button, Image, Space, Typography, theme } from "antd";
-import CardContentWrapper from "components/CardContentWrapper";
-import CardTitle from "components/CardTitle";
-import Loader from "components/Loader";
-import { pollBankIdStatus } from "gateway-api/gateway-service";
+import CardContentWrapper from "src/components/CardContentWrapper";
+import CardTitle from "src/components/CardTitle";
+import Loader from "src/components/Loader";
+import { pollBankIdStatus } from "src/gateway-api/gateway-service";
 import { useTranslation } from "react-i18next";
-import { sendPostMessage } from "utils/helpers";
-import { useLoginProvider } from "utils/state-utils";
+import { sendPostMessage } from "src/utils/helpers";
+import { useLoginProvider } from "src/utils/state-utils";
 
 type Props = {
   onSuccess: () => void;

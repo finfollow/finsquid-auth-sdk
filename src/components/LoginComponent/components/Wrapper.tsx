@@ -1,6 +1,6 @@
-import { Grid, Typography, theme } from "antd";
+import { Grid, theme } from "antd";
 import { ReactNode } from "react";
-import BackButton from "components/BackButton";
+import BackButton from "src/components/BackButton";
 import Stepper from "./Stepper";
 import { useTranslation } from "react-i18next";
 
