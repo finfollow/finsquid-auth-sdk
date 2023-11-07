@@ -1,4 +1,4 @@
-import { axiosInstance } from "@refinedev/simple-rest";
+import axios, { AxiosInstance } from "axios";
 import {
   AccountsOverview,
   BankIdInitQueryParams,
@@ -12,10 +12,17 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { dummyReceivingAccounts } from "src/components/LoginComponent/constants";
 
-const httpClient = axiosInstance;
 const apiUrl = new URLSearchParams(document.location.search).get("api_url");
 const url =
   apiUrl || import.meta.env.VITE_GATEWAY_URL || "http://localhost:8787";
+
+export const httpClient: AxiosInstance = axios.create({
+  url,
+  timeout: 10000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 export function useProviders() {
   return useQuery<Provider[]>({
