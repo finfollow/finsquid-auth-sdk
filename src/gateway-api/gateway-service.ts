@@ -31,7 +31,7 @@ export function useProviders() {
       httpClient(`${url}/v1/providers`)
         .then((res) => res.data)
         .catch((err) => {
-          throw err?.response?.data || err;
+          throw err?.message || err;
         }),
   });
 }
@@ -65,7 +65,7 @@ export async function bankIdInit(
     };
   } catch (error: any) {
     console.log("BankID init failed with error: ", error);
-    throw error?.response?.data ?? error;
+    throw error?.message ?? error;
   }
 }
 
@@ -93,7 +93,7 @@ export async function pollBankIdStatus(
     };
   } catch (error: any) {
     console.error("BankID status failed", error);
-    throw error?.response?.data ?? error;
+    throw error?.message ?? error;
   }
 }
 
@@ -112,7 +112,7 @@ export async function getUserAccounts(
     return res.data;
   } catch (error: any) {
     console.error("getUserAccounts", error);
-    throw error?.response?.data ?? error;
+    throw error?.message ?? error;
   }
 }
 
@@ -129,7 +129,7 @@ export async function selectUserAccount(
     return res.data;
   } catch (error: any) {
     console.error("getUserAccounts", error);
-    throw error?.response?.data ?? error;
+    throw error?.message ?? error;
   }
 }
 
@@ -142,7 +142,7 @@ export function useAccounts(sid?: string | null, includeRawData = false) {
       })
         .then((res) => res.data)
         .catch((err) => {
-          throw err?.response?.data || err;
+          throw err?.message || err;
         }),
     enabled: !!sid,
   });
@@ -162,7 +162,7 @@ export function useAccountPositions(
       )
         .then((res) => res.data)
         .catch((err) => {
-          throw err?.response?.data || err;
+          throw err?.message || err;
         }),
   });
 }
