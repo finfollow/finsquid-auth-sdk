@@ -32,12 +32,11 @@ export default function SuccessConnect({ onSubmit, onBack }: Props) {
   useEffect(() => {
     // @TODO handle the case if there are no any accounts
     if (onSubmit && data?.accounts.length) {
-      setTransferingProvider(provider as ProviderT);
       onSubmit();
+      setTransferingProvider(provider as ProviderT);
     }
     if (!onSubmit && data?.accounts.length) {
       setConnectedProviders((prev) => [...prev, provider as ProviderT]);
-      setProvider(null);
       sendPostMessage({ type: "success", data: provider, error: null });
     }
   }, [data?.accounts]);
@@ -55,7 +54,7 @@ export default function SuccessConnect({ onSubmit, onBack }: Props) {
     if (redirectLink) window.parent.location.href = redirectLink;
   };
 
-  if (isFetching) {
+  if (isFetching || onSubmit) {
     return (
       <div
         style={{
@@ -97,20 +96,17 @@ export default function SuccessConnect({ onSubmit, onBack }: Props) {
         <Typography.Text>{t("SuccessConnect.from your bank!")}</Typography.Text>
       </Space>
       <Space direction="vertical" style={{ marginTop: 50 }}>
-        {!onSubmit && (
-          <Button
-            block
-            style={{ borderColor: token.colorPrimary }}
-            onClick={onBack}
-          >
-            {t("button.Add Bank")}
-          </Button>
-        )}
         <Button
-          type="primary"
           block
-          onClick={() => (onSubmit ? onSubmit() : handleSubmit())}
+          style={{ borderColor: token.colorPrimary }}
+          onClick={() => {
+            onBack();
+            setProvider(null);
+          }}
         >
+          {t("button.Add Bank")}
+        </Button>
+        <Button type="primary" block onClick={handleSubmit}>
           {t("button.Done")}
         </Button>
       </Space>
