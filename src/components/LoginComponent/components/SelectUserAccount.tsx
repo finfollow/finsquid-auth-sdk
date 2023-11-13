@@ -6,9 +6,11 @@ import {
   selectUserAccount,
 } from "gateway-api/gateway-service";
 import { useEffect, useState } from "react";
-import { errorNotifier } from "utils/helpers";
+import { sendPostMessage } from "utils/helpers";
 import { useLoginProvider } from "utils/state-utils";
 import { useTranslation } from "react-i18next";
+import CardContentWrapper from "components/CardContentWrapper";
+import CardTitle from "components/CardTitle";
 
 type Props = {
   onSuccess: () => void;
@@ -21,6 +23,7 @@ export default function SelectUserAccount({ onSuccess }: Props) {
   const [isSelectLoading, setIsSelectLoading] = useState(false);
   const [selectedAccount, setSelectedAccount] = useState<string | null>(null);
   const [useraccounts, setUseraccounts] = useState<UserAccount[] | null>(null);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     init();
@@ -36,15 +39,12 @@ export default function SelectUserAccount({ onSuccess }: Props) {
       if (_useraccounts.length === 1)
         await selectAccount(_useraccounts[0].accountId);
       if (_useraccounts.length === 0) onSuccess();
-    } catch (err) {
-      console.error("fetch useraccounts error:", err);
-      errorNotifier({
-        description: (
-          <pre>
-            Fetch user accounts error:{"\n"}
-            {JSON.stringify(err, null, 2)}
-          </pre>
-        ),
+    } catch (error) {
+      console.error("fetch useraccounts error:", error);
+      setIsError(true);
+      sendPostMessage({
+        type: "error",
+        error: { type: t("error.User accounts fetch error"), message: error },
       });
     } finally {
       setIsLoading(false);
@@ -58,51 +58,73 @@ export default function SelectUserAccount({ onSuccess }: Props) {
       const res = await selectUserAccount(provider?.sid, accountId);
       console.log("selectAccount res: ", res);
       if (res.status === "complete") onSuccess();
-    } catch (err) {
-      console.error("select useraccount error:", err);
-      errorNotifier({
-        description: (
-          <pre>
-            Select user account error:{"\n"}
-            {JSON.stringify(err, null, 2)}
-          </pre>
-        ),
+    } catch (error) {
+      console.error("select useraccount error:", error);
+      sendPostMessage({
+        type: "error",
+        error: { type: t("error.Select user account error"), message: error },
       });
     } finally {
       setIsSelectLoading(false);
     }
   };
 
-  if (isLoading)
+  if (isLoading || isError)
     return (
-      <Space
-        direction="vertical"
-        style={{ alignItems: "center", marginTop: 100 }}
+      <div
+        style={{
+          display: "flex",
+          flexGrow: 1,
+          flexDirection: "column",
+        }}
       >
-        <Loader />
-      </Space>
+        <CardTitle text="Connect Bank" />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexGrow: 1,
+          }}
+        >
+          {isLoading && <Loader />}
+          {isError && (
+            <Button
+              type="primary"
+              block
+              onClick={() => {
+                setIsError(false);
+                init();
+              }}
+            >
+              {t("button.Try again")}
+            </Button>
+          )}
+        </div>
+      </div>
     );
 
   return (
-    <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
-      <Typography.Text style={{ width: 250 }}>
-        {t(
-          "You have more than one user accounts with this bank. Select which one that you would like to connect."
-        )}
-      </Typography.Text>
-      <Select
-        value={selectedAccount}
-        style={{ width: 250, height: 48, marginTop: 30 }}
-        placeholder={t("placeholder.accountSelect")}
-        loading={isSelectLoading}
-        onChange={setSelectedAccount}
-        options={useraccounts?.map((el) => ({
-          value: el.accountId,
-          label: el.accountName,
-        }))}
-      />
+    <CardContentWrapper>
+      <CardTitle text="Connect Bank" />
+      <div style={{ width: 250 }}>
+        <Typography.Text>
+          {t(
+            "You have more than one user accounts with this bank. Select which one that you would like to connect."
+          )}
+        </Typography.Text>
+        <Select
+          value={selectedAccount}
+          style={{ width: 250, height: 48, marginTop: 30 }}
+          placeholder={t("placeholder.accountSelect")}
+          loading={isSelectLoading}
+          onChange={setSelectedAccount}
+          options={useraccounts?.map((el) => ({
+            value: el.accountId,
+            label: el.accountName,
+          }))}
+        />
+      </div>
       <Button
         type="primary"
         block
@@ -113,6 +135,6 @@ export default function SelectUserAccount({ onSuccess }: Props) {
       >
         {t("button.Next")}
       </Button>
-    </div>
+    </CardContentWrapper>
   );
 }

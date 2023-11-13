@@ -33,17 +33,17 @@ export default function Wrapper({
     <div
       style={{
         width: "100%",
-        height: "100%",
+        minHeight: "100vh",
       }}
     >
       <div
         style={{
-          height: "100%",
+          minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           background: token.colorBgLayout,
-          padding: xs ? "40px 0 20px 0" : "50px 50px 20px 50px",
+          padding: xs ? "40px 0" : "50px",
         }}
       >
         {onBack && <BackButton onClick={onBack} />}
@@ -54,16 +54,6 @@ export default function Wrapper({
             containerStyles={{ marginBottom: 24 }}
           />
         )}
-        <Typography.Title
-          level={xs ? 3 : 1}
-          style={{
-            textAlign: "center",
-            marginBottom: lg ? 50 : 40,
-            padding: "0 45px",
-          }}
-        >
-          {title && t(`title.${title}`)}
-        </Typography.Title>
         {children}
       </div>
     </div>

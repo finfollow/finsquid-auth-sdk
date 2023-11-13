@@ -1,9 +1,11 @@
-import { Space, Typography } from "antd";
+import { Grid, Space, Typography } from "antd";
 import BankLogo from "components/BankLogo";
 import { useLoginProvider } from "utils/state-utils";
 import { StepT } from "../../constants";
 import BankIdOption from "./components/BankIdOption";
 import { useTranslation } from "react-i18next";
+import CardTitle from "components/CardTitle";
+import CardContentWrapper from "components/CardContentWrapper";
 
 type Props = {
   setNextStep: (step: StepT) => void;
@@ -14,7 +16,8 @@ export default function LoginOptions({ setNextStep }: Props) {
   const [provider] = useLoginProvider();
 
   return (
-    <>
+    <CardContentWrapper>
+      <CardTitle text="Connect Bank" />
       <Space
         size={"middle"}
         direction="vertical"
@@ -65,6 +68,6 @@ export default function LoginOptions({ setNextStep }: Props) {
           }
         })}
       </div>
-    </>
+    </CardContentWrapper>
   );
 }

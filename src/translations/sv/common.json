@@ -45,7 +45,15 @@
   },
   "error": {
     "Something went wrong.": "Något gick fel.",
-    "There is no session ID or account ID": "Det finns inget sessions-ID eller konto-ID"
+    "There is no session ID or account ID": "Det finns inget sessions-ID eller konto-ID",
+    "Bank init error": "Bankinitieringsfel",
+    "Bank id status pulling error": "Fel vid dragning av bank-id-status",
+    "Account positions fetch error": "Fel vid hämtning av kontopositioner",
+    "Providers fetch error": "Providers hämta fel",
+    "Receiving accounts fetch error": "Hämtningsfel för att ta emot konton",
+    "User accounts fetch error": "Fel vid hämtning av användarkonton",
+    "Select user account error": "Välj användarkonto fel",
+    "Accounts fetch error": "Fel vid hämtning av konton"
   },
   "Connect your bank accounts with BankID and find all account information.": "Koppla dina bankkonton med BankID och hitta all kontoinformation.",
   "Same Device": "Samma enhet",

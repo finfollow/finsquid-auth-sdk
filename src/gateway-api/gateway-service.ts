@@ -20,7 +20,12 @@ const url =
 export function useProviders() {
   return useQuery<Provider[]>({
     queryKey: ["providersList"],
-    queryFn: () => httpClient(`${url}/v1/providers`).then((res) => res.data),
+    queryFn: () =>
+      httpClient(`${url}/v1/providers`)
+        .then((res) => res.data)
+        .catch((err) => {
+          throw err?.response?.data || err;
+        }),
   });
 }
 
@@ -52,12 +57,8 @@ export async function bankIdInit(
       success: true,
     };
   } catch (error: any) {
-    console.log("BankID init failed", error);
-
-    return {
-      success: false,
-      status: error?.statusCode === 409 ? "conflict" : "failed",
-    };
+    console.log("BankID init failed with error: ", error);
+    throw error?.response?.data ?? error;
   }
 }
 
@@ -83,10 +84,9 @@ export async function pollBankIdStatus(
       raw: res.data.raw,
       imageChallengeData: res.data.imageChallengeData,
     };
-  } catch (error) {
+  } catch (error: any) {
     console.error("BankID status failed", error);
-
-    return { status: "error" };
+    throw error?.response?.data ?? error;
   }
 }
 
@@ -103,9 +103,9 @@ export async function getUserAccounts(
       { headers: headers }
     );
     return res.data;
-  } catch (error) {
+  } catch (error: any) {
     console.error("getUserAccounts", error);
-    return [];
+    throw error?.response?.data ?? error;
   }
 }
 
@@ -120,9 +120,9 @@ export async function selectUserAccount(
       { headers: { sid } }
     );
     return res.data;
-  } catch (error) {
+  } catch (error: any) {
     console.error("getUserAccounts", error);
-    return { status: "error" };
+    throw error?.response?.data ?? error;
   }
 }
 
@@ -132,7 +132,11 @@ export function useAccounts(sid?: string | null, includeRawData = false) {
     queryFn: () =>
       httpClient(`${url}/v1/accounts?includeRawData=${includeRawData}`, {
         headers: { sid: sid as string },
-      }).then((res) => res.data),
+      })
+        .then((res) => res.data)
+        .catch((err) => {
+          throw err?.response?.data || err;
+        }),
     enabled: !!sid,
   });
 }
@@ -148,7 +152,11 @@ export function useAccountPositions(
       httpClient(
         `${url}/v1/accounts/${accountId}/positions?includeRawData=${includeRawData}`,
         { headers: { sid: sid } }
-      ).then((res) => res.data),
+      )
+        .then((res) => res.data)
+        .catch((err) => {
+          throw err?.response?.data || err;
+        }),
   });
 }
 

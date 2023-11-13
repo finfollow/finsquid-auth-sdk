@@ -8,15 +8,23 @@ import {
   useLoginIsSameDevice,
   useLoginProvider,
 } from "utils/state-utils";
-import { errorNotifier } from "utils/helpers";
+import { sendPostMessage } from "utils/helpers";
 import { useTranslation } from "react-i18next";
+import { StepT, steps } from "../constants";
+import CardTitle from "components/CardTitle";
+import CardContentWrapper from "components/CardContentWrapper";
 
 type Props = {
+  setNextStep: (step: StepT) => void;
   onSuccess: () => void;
   onCancel: () => void;
 };
 
-export default function ScanQrCode({ onSuccess, onCancel }: Props) {
+export default function ScanQrCode({
+  setNextStep,
+  onSuccess,
+  onCancel,
+}: Props) {
   const { t } = useTranslation();
   const { token } = theme.useToken();
   const [ssn] = useConnectionSSN();
@@ -35,6 +43,7 @@ export default function ScanQrCode({ onSuccess, onCancel }: Props) {
 
   const init = async () => {
     if (!provider.name) return;
+    setQrStatus("loading");
     try {
       const res = await bankIdInit(
         provider.name,
@@ -48,17 +57,17 @@ export default function ScanQrCode({ onSuccess, onCancel }: Props) {
         setQrStatus("active");
         if (bankIdStatusPulling.isFetchedAfterMount)
           bankIdStatusPulling.refetch();
+      } else if (!res.imageChallengeData && res.sid && isWithSNNConnection) {
+        setProvider({ ...provider, sid: res.sid });
+        setNextStep(steps.waitingConnection);
       } else throw "There is no qr code data or session id";
-    } catch (err) {
-      console.error("bankIdInit error:", err);
-      errorNotifier({
-        description: (
-          <pre>
-            Fetch accounts error:{"\n"}
-            {JSON.stringify(err, null, 2)}
-          </pre>
-        ),
+    } catch (error) {
+      console.error("bankIdInit error:", error);
+      sendPostMessage({
+        type: "error",
+        error: { type: t("error.Bank init error"), message: error },
       });
+      setQrStatus("expired");
     }
   };
 
@@ -73,7 +82,16 @@ export default function ScanQrCode({ onSuccess, onCancel }: Props) {
       }
       return data?.status == "pending" ? 1000 : false;
     },
-    onError: () => setQrStatus("expired"),
+    onError: (error) => {
+      setQrStatus("expired");
+      sendPostMessage({
+        type: "error",
+        error: {
+          type: t("error.Bank id status pulling error"),
+          message: error,
+        },
+      });
+    },
     enabled: !!sid,
   });
 
@@ -91,27 +109,36 @@ export default function ScanQrCode({ onSuccess, onCancel }: Props) {
   ]);
 
   return (
-    <div
-      style={{ display: "flex", alignItems: "center", flexDirection: "column" }}
-    >
-      <Typography.Text>
-        {t("1. Open the BankID app in your mobile.")}
-      </Typography.Text>
-      <Typography.Text>{t("2. Click at the QR-code button.")}</Typography.Text>
-      <Typography.Text>{t("3. Scan the QR-code below.")}</Typography.Text>
+    <CardContentWrapper>
+      <CardTitle text="Scan QR-code" />
       <div
         style={{
-          margin: 40,
-          background: token.colorBgContainer,
-          borderRadius: 8,
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
         }}
       >
-        <QRCode
-          value={qrCode}
-          status={qrStatus}
-          style={{ background: token.colorBgContainer }}
-          onRefresh={init}
-        />
+        <Typography.Text>
+          {t("1. Open the BankID app in your mobile.")}
+        </Typography.Text>
+        <Typography.Text>
+          {t("2. Click at the QR-code button.")}
+        </Typography.Text>
+        <Typography.Text>{t("3. Scan the QR-code below.")}</Typography.Text>
+        <div
+          style={{
+            margin: 40,
+            background: token.colorBgContainer,
+            borderRadius: 8,
+          }}
+        >
+          <QRCode
+            value={qrCode}
+            status={qrStatus}
+            style={{ background: token.colorBgContainer }}
+            onRefresh={init}
+          />
+        </div>
       </div>
       <Button
         block
@@ -120,6 +147,6 @@ export default function ScanQrCode({ onSuccess, onCancel }: Props) {
       >
         {t("button.Cancel")}
       </Button>
-    </div>
+    </CardContentWrapper>
   );
 }

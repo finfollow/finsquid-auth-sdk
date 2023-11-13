@@ -1,8 +1,10 @@
-import { Button, Image } from "antd";
+import { Button, Image, theme } from "antd";
+import CardContentWrapper from "components/CardContentWrapper";
+import CardTitle from "components/CardTitle";
 import { bankIdInit } from "gateway-api/gateway-service";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { errorNotifier } from "utils/helpers";
+import { sendPostMessage } from "utils/helpers";
 import {
   useConnectionSSN,
   useIsLoginWithSSN,
@@ -16,11 +18,13 @@ type Props = {
 
 export default function OpenBankId({ onSuccess }: Props) {
   const { t } = useTranslation();
+  const { token } = theme.useToken();
   const [provider, setProvider] = useLoginProvider();
   const [isSameDevice] = useLoginIsSameDevice();
   const [isWithSNNConnection] = useIsLoginWithSSN();
   const [ssn] = useConnectionSSN();
   const [autostartToken, setAutostartToken] = useState<string | null>(null);
+  const [showRetryBtn, setShowRetryBtn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   //@TODO handle this case
@@ -43,17 +47,16 @@ export default function OpenBankId({ onSuccess }: Props) {
       if (res.autostartToken && res.sid) {
         setProvider({ ...provider, sid: res.sid });
         setAutostartToken(res.autostartToken);
+      } else if (res.status === "conflict") {
+        setShowRetryBtn(true);
       } else throw "There is no start token or session id";
-    } catch (err) {
-      console.error("bankIdInit error:", err);
-      errorNotifier({
-        description: (
-          <pre>
-            Fetch accounts error:{"\n"}
-            {JSON.stringify(err, null, 2)}
-          </pre>
-        ),
+    } catch (error) {
+      console.error("bankIdInit error:", error);
+      sendPostMessage({
+        type: "error",
+        error: { type: t("error.Bank init error"), message: error },
       });
+      setShowRetryBtn(true);
     } finally {
       setIsLoading(false);
     }
@@ -62,41 +65,50 @@ export default function OpenBankId({ onSuccess }: Props) {
   const isAndroid = /Android/i.test(navigator.userAgent);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-      }}
-    >
-      <Button
-        type={"primary"}
-        loading={isLoading}
-        disabled={!autostartToken}
-        block
-        onClick={() => {
-          window.open(
-            isAndroid
-              ? `bankid:///?autostarttoken=${autostartToken}&redirect=null`
-              : `https://app.bankid.com/?autostarttoken=${autostartToken}&redirect=null`
-          );
-          onSuccess();
-        }}
-      >
-        {t("Open BankID")}
-        <Image
-          preview={false}
-          style={{
-            position: "absolute",
-            objectFit: "cover",
-            width: 30,
-            height: 40,
-            top: -25,
-            left: 20,
+    <CardContentWrapper>
+      <CardTitle text="Connect Bank" />
+      {!showRetryBtn ? (
+        <Button
+          type={"primary"}
+          loading={isLoading}
+          disabled={!autostartToken}
+          block
+          onClick={() => {
+            window.open(
+              isAndroid
+                ? `bankid:///?autostarttoken=${autostartToken}&redirect=null`
+                : `https://app.bankid.com/?autostarttoken=${autostartToken}&redirect=null`
+            );
+            onSuccess();
           }}
-          src="bankID_logo_white.svg"
-        />
-      </Button>
-    </div>
+        >
+          {t("Open BankID")}
+          <Image
+            preview={false}
+            style={{
+              position: "absolute",
+              objectFit: "cover",
+              width: 30,
+              height: 40,
+              top: -25,
+              left: 20,
+            }}
+            src="bankID_logo_white.svg"
+          />
+        </Button>
+      ) : (
+        <Button
+          loading={isLoading}
+          block
+          onClick={() => {
+            setShowRetryBtn(false);
+            init();
+          }}
+          style={{ borderColor: token.colorPrimary }}
+        >
+          {t("button.Try again")}
+        </Button>
+      )}
+    </CardContentWrapper>
   );
 }

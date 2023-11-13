@@ -1,17 +1,26 @@
 import { useQuery } from "@tanstack/react-query";
-import { Button, Image, Space, Typography } from "antd";
+import { Button, Image, Space, Typography, theme } from "antd";
+import CardContentWrapper from "components/CardContentWrapper";
+import CardTitle from "components/CardTitle";
 import Loader from "components/Loader";
 import { pollBankIdStatus } from "gateway-api/gateway-service";
 import { useTranslation } from "react-i18next";
+import { sendPostMessage } from "utils/helpers";
 import { useLoginProvider } from "utils/state-utils";
 
 type Props = {
   onSuccess: () => void;
   onRetry: () => void;
+  onCancel: () => void;
 };
 
-export default function WaitingConnection({ onSuccess, onRetry }: Props) {
+export default function WaitingConnection({
+  onSuccess,
+  onRetry,
+  onCancel,
+}: Props) {
   const { t } = useTranslation();
+  const { token } = theme.useToken();
   const [provider] = useLoginProvider();
   //@TODO handle this case
   if (!provider) return null;
@@ -25,6 +34,15 @@ export default function WaitingConnection({ onSuccess, onRetry }: Props) {
       }
       return data?.status == "pending" ? 1000 : false;
     },
+    onError: (error) => {
+      sendPostMessage({
+        type: "error",
+        error: {
+          type: t("error.Bank id status pulling error"),
+          message: error,
+        },
+      });
+    },
     enabled: !!provider?.sid,
   });
 
@@ -35,13 +53,8 @@ export default function WaitingConnection({ onSuccess, onRetry }: Props) {
     bankIdStatusPulling.data?.status !== "complete"
   )
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
+      <CardContentWrapper>
+        <CardTitle text="Waiting for authentication" />
         <Typography.Text>{t("error.Something went wrong.")}</Typography.Text>
         <Button
           type="primary"
@@ -63,15 +76,20 @@ export default function WaitingConnection({ onSuccess, onRetry }: Props) {
             src="bankID_logo_white.svg"
           />
         </Button>
-      </div>
+      </CardContentWrapper>
     );
 
   return (
-    <Space
-      direction="vertical"
-      style={{ alignItems: "center", marginTop: 100 }}
-    >
+    <CardContentWrapper>
+      <CardTitle text="Waiting for authentication" />
       {bankIdStatusPulling.data?.status === "pending" && <Loader />}
-    </Space>
+      <Button
+        block
+        style={{ borderColor: token.colorPrimary, marginTop: 30 }}
+        onClick={onCancel}
+      >
+        {t("button.Cancel")}
+      </Button>
+    </CardContentWrapper>
   );
 }

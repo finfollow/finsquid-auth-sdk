@@ -5,8 +5,9 @@ import { SearchOutlined } from "@ant-design/icons";
 import { useLoginProvider } from "utils/state-utils";
 import { useProviders } from "gateway-api/gateway-service";
 import { Provider } from "gateway-api/types";
-import { errorNotifier, tablesSort } from "utils/helpers";
+import { sendPostMessage, tablesSort } from "utils/helpers";
 import { useTranslation } from "react-i18next";
+import CardTitle from "components/CardTitle";
 
 type Props = {
   onSubmit: () => void;
@@ -16,7 +17,7 @@ type Props = {
 export default function SelectProvider({ onSubmit, radioBtns }: Props) {
   const { t } = useTranslation();
   const { token } = theme.useToken();
-  const { lg, xs } = Grid.useBreakpoint();
+  const { xs } = Grid.useBreakpoint();
   const { data, isFetching, error } = useProviders();
   const [banks, setBanks] = useState<Provider[]>([]);
   const [provider, setProvider] = useLoginProvider();
@@ -36,29 +37,20 @@ export default function SelectProvider({ onSubmit, radioBtns }: Props) {
 
   useEffect(() => {
     if (error)
-      errorNotifier({
-        description: (
-          <pre>
-            Fetch Providers error:{"\n"}
-            {JSON.stringify(error, null, 2)}
-          </pre>
-        ),
+      sendPostMessage({
+        type: "error",
+        error: { type: t("error.Providers fetch error"), message: error },
       });
   }, [error]);
 
   return (
     <>
-      <div
-        style={{
-          padding: lg ? "0 70px 40px 70px" : "0 40px 30px 40px",
-        }}
-      >
-        <Input
-          onChange={handleSearch}
-          style={{ borderRadius: 24, height: 48, width: 200 }}
-          prefix={<SearchOutlined style={{ fontSize: 22 }} />}
-        />
-      </div>
+      <CardTitle text="Connect Bank" />
+      <Input
+        onChange={handleSearch}
+        style={{ borderRadius: 24, height: 48, width: 200, marginBottom: 40 }}
+        prefix={<SearchOutlined style={{ fontSize: 22 }} />}
+      />
       <div style={{ flex: "auto" }}>
         <List
           size={xs ? "small" : "default"}
@@ -79,11 +71,9 @@ export default function SelectProvider({ onSubmit, radioBtns }: Props) {
           )}
           bordered
           style={{
-            width: 300,
-            height: "60vh",
-            overflow: "scroll",
-            background: token.colorBgContainer,
-            borderRadius: 0,
+            width: 280,
+            background: token.colorBgLayout,
+            border: "none",
           }}
         />
       </div>
@@ -92,7 +82,7 @@ export default function SelectProvider({ onSubmit, radioBtns }: Props) {
           type="primary"
           disabled={!provider}
           block
-          style={{ height: 40, borderRadius: 20 }}
+          style={{ marginTop: 30 }}
           onClick={onSubmit}
         >
           {t("button.Next")}

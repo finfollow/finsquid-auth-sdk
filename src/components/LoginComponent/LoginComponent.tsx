@@ -32,7 +32,6 @@ export default function ConnectAccount({ type, radioBtns }: Props) {
 
   return (
     <Wrapper
-      title={step.title}
       currentStep={type === "transfer" ? step.wrapperStep : undefined}
       onBack={
         step.prevStep
@@ -57,10 +56,12 @@ export default function ConnectAccount({ type, radioBtns }: Props) {
         <WaitingConnection
           onSuccess={() => nextStep(steps.selectUserAccount)}
           onRetry={() => nextStep(steps.openBankID)}
+          onCancel={() => step.prevStep && nextStep(steps[step.prevStep])}
         />
       )}
       {step.value === "scanQRcode" && (
         <ScanQrCode
+          setNextStep={nextStep}
           onSuccess={() => nextStep(steps.selectUserAccount)}
           onCancel={() => step.prevStep && nextStep(steps[step.prevStep])}
         />

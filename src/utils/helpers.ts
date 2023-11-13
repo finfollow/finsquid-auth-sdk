@@ -1,5 +1,3 @@
-import { notification } from "antd";
-import { ArgsProps } from "antd/es/notification/interface";
 import {
   Account,
   InstrumentType,
@@ -8,18 +6,6 @@ import {
   Position,
   TransactionType,
 } from "gateway-api/types";
-
-export const errorNotifier = ({
-  message = "An error has occurred",
-  duration = 0,
-  ...props
-}: Omit<ArgsProps, "message"> & { message?: ArgsProps["message"] }) => {
-  notification.error({
-    message,
-    duration,
-    ...props,
-  });
-};
 
 export const currencyValue = (
   m: Money | null | undefined,
@@ -100,3 +86,18 @@ export const categorizePositionsByType = (positions?: Position[]) =>
       type,
       positions: positions.filter((el) => el.instrument.type === type),
     }));
+
+type PostMessageData = {
+  type: "success" | "error";
+  data?: any;
+  error?: { type?: string; message?: any } | null;
+};
+
+export const sendPostMessage = (message: PostMessageData) => {
+  const searchParams = new URLSearchParams(document.location.search);
+  const targetOrigin = searchParams.get("redirect");
+
+  if (targetOrigin) {
+    window.parent.postMessage(JSON.stringify(message), targetOrigin);
+  }
+};
