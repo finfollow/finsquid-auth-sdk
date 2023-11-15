@@ -75,7 +75,7 @@ export default function SelectReceivingAccount({ onSubmit }: Props) {
             justifyContent: "center",
           }}
         >
-          {transformAccountType(acc.type)}
+          {transformAccountType(acc.subType)}
         </div>
       ),
       sorter: (a, b) => tablesSort(a.type, b.type),
@@ -122,7 +122,7 @@ export default function SelectReceivingAccount({ onSubmit }: Props) {
             containerStyle={{ marginTop: 20, borderRadius: xs ? 0 : 10 }}
             onRow={(acc) => ({
               onClick: () =>
-                transferingAccount?.type === acc.type &&
+                transferingAccount?.subType === acc.subType &&
                 setReceivingAccount((prev) =>
                   prev?.providerAccountId === acc.providerAccountId ? null : acc
                 ),

@@ -112,6 +112,7 @@ export type Account = {
   name: string;
   /** Current account's account type */
   type: AccountType;
+  subType: AccountSubType;
   /** Current balance in liquid cash */
   balance?: Money;
   /** Current total value of account */
@@ -125,12 +126,19 @@ export type Account = {
 };
 
 export type AccountType =
+  | "BANKACCOUNT"
+  | "INVESTMENT"
+  | "PENSION"
+  | "LOAN"
+  | "OTHER";
+
+export type AccountSubType =
   | "KF"
   | "AF"
   | "ISK"
-  | "SPAR_PLUS"
-  | "INVESTMENT"
+  | "TJP"
   | "SAVINGS"
+  | "CHECKING"
   | "OTHER";
 
 export type TransactionType =
@@ -139,8 +147,8 @@ export type TransactionType =
   | "DEPOSIT"
   | "WITHDRAWAL"
   | "DIVIDEND"
-  | "STOCK_LOAN"
-  | "WITHHOLDING_TAX"
+  | "INTEREST_AND_FEES"
+  | "TAX"
   | "OTHER";
 
 export type LoanType =

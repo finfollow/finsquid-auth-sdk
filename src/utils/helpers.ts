@@ -50,13 +50,11 @@ export function tablesSort(
 }
 
 export const transformAccountType = (
-  type: Account["type"] | null | undefined
+  type: Account["subType"] | null | undefined
 ) => {
   switch (type) {
-    case "SPAR_PLUS":
-      return "SP";
-    case "INVESTMENT":
-      return "INV";
+    case "CHECKING":
+      return "CHK";
     case "SAVINGS":
       return "SV";
     case "OTHER":
