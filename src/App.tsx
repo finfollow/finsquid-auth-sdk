@@ -12,7 +12,13 @@ import { useEffect } from "react";
 import { httpClient } from "./gateway-api/gateway-service";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false, // default: true
+    },
+  },
+});
 
 function App() {
   const { i18n } = useTranslation();
