@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Getting Started
+title: Auth SDK
 nav_order: 2
 ---
 
-# Getting Started
+# Auth SDK
 
 ## Embed in iframe
 
@@ -91,4 +91,4 @@ Go through the authentication inside the integrated iframe flow. If all is succe
 
 ## Reference
 
-If you integrate Finsquid Auth in your application via an `iframe`, the result will be delivered as stringified JSON object via `postMessage` to the parent window.
+If you integrate Finsquid Auth in your application via an `iframe`, the result will be delivered as JSON object via `postMessage` to the parent window.

@@ -1,23 +1,23 @@
 ---
 layout: default
 title: Localization
-nav_order: 4
+nav_order: 5
 ---
 
 # Localization
 
-Finsquid Auth SDK supports English and Swedish languages:
+Finsquid SDK supports English and Swedish languages:
 
-![Color customization](./images/03.png)
+![Auth localization](./images/auth-localization.png)
 
-You can change the language appending URL parameter `lang=sv` to your `authentication link`.
+You can change the language appending URL parameter `lang=sv` to your `sdk link`.
 
 ```js
 // lang values - 'en' or 'sv'
 const lang = "en";
-const AUTH_LINK = authSdkLink + `/?api_key=${apiKey}&lang=${lang}`;
+const SDK_LINK = sdkLink + `/?api_key=${apiKey}&lang=${lang}`;
 ```
 
 ```html
-<iframe src="{AUTH_LINK}" />;
+<iframe src="{SDK_LINK}" />;
 ```
