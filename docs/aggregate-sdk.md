@@ -14,15 +14,17 @@ You can directly embed Finsquid Aggregate within your web app using an iframe.
 
 ### 1. Configure the URL for the iframe
 
-First you need to get `Aggregate SDK link` and `api key` from [Finsquid](https://www.finsquid.io/contact). And append the URL parameter `api_key=${key}` to your aggregation link.
+First you need to get your [Temporary Token](getting-started.html). After you have it append the URL parameter `api_key=${TEMPORARY_TOKEN}` and the URL parameter `iframe=true` to your `aggregation link`. This will make sure that the response message is sent via `postMessage` to the parent window.
+
+```js
+const AGGREGATE_LINK = new URL("https://sdk.finsquid.io/aggregate");
+AGGREGATE_LINK.searchParams.set("api_key", TEMPORARY_TOKEN);
+AUTH_LINK.searchParams.set("iframe", true);
+```
 
 ### 2. Add the URL to an iframe element
 
-Add the `authentication link` as the `src` parameter of an `<iframe>` HTML element.
-
-```js
-const AGGREGATE_LINK = aggregateSdkLink + `/?api_key=${apiKey}`;
-```
+Add the `aggregation link` as the `src` parameter of an `<iframe>` HTML element.
 
 ```html
 <iframe src="{AGGREGATE_LINK}" />;
@@ -46,11 +48,11 @@ All communication between an iframed Finsquid Auth and the parent host is done v
 window.addEventListener("message", handlePostMessage);
 
 const handlePostMessage = (event: any) => {
-  if (event.origin !== AUTH_LINK) return;
+  if (event.origin !== AGGREGATE_LINK.origin) return;
 
   const { type, data, error } = JSON.parse(event.data);
 
-  if (type === "providers") {
+  if (type === "success") {
     // This is the array of provider objects that contains sid that should be used in headers for API requests
     console.log(`Aggregate SDK returned with provider object: ${data}`);
   } else if (type === "error") {

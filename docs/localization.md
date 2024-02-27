@@ -15,7 +15,8 @@ You can change the language appending URL parameter `lang=sv` to your `sdk link`
 ```js
 // lang values - 'en' or 'sv'
 const lang = "en";
-const SDK_LINK = sdkLink + `/?api_key=${apiKey}&lang=${lang}`;
+const SDK_LINK = new URL(sdkLink);
+SDK_LINK.searchParams.set("lang", lang);
 ```
 
 ```html

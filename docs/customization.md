@@ -24,33 +24,34 @@ const theme = {
   colorBgTextHover: "#0000000f",
   defaultBg: "#FFFFFF",
 };
-const themeParams = encodeURIComponent(JSON.stringify(theme));
 ```
 
 Append the URL parameter `theme` to your `sdk link`.
 
 ```js
-const SDK_LINK = sdkLink + `/?api_key=${apiKey}&theme=${themeParams}`;
+const SDK_LINK = new URL(sdkLink);
+SDK_LINK.searchParams.set("theme", JSON.stringify(theme));
 ```
 
 ```html
 <iframe src="{SDK_LINK}" />;
 ```
 
-### Radio buttons option (Auth SDK only)
+### Radio buttons option
 
 Lists looks as below by default:
 
 ![Lists appearance](./images/auth-radio-off.png)
 
-You can change the lists appearance appending URL parameter `radio-buttons=true` to your `authentication link`.
+You can change the lists appearance appending URL parameter `radio-buttons=true` to your `sdk link`.
 
 ```js
-const AUTH_LINK = authSdkLink + `/?api_key=${apiKey}&radio-buttons=true`;
+const SDK_LINK = new URL(sdkLink);
+SDK_LINK.searchParams.set("radio-buttons", true);
 ```
 
 ```html
-<iframe src="{AUTH_LINK}" />;
+<iframe src="{SDK_LINK}" />;
 ```
 
 Lists will look as below:

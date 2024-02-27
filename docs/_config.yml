@@ -33,6 +33,12 @@ url: https://just-the-docs.github.io
 aux_links:
   FinSquid: https://www.finsquid.io/
 
+# External navigation links
+nav_external_links:
+  - title: API Documentation
+    url: https://gateway.finsquid.io/doc
+    opens_in_new_tab: true # set to true to open this link in a new tab - defaults to false
+
 plugins:
   - jekyll-feed
 # Exclude from processing.
