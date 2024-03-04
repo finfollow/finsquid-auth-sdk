@@ -42,7 +42,7 @@ You can use these examples to get started with the Auth SDK.
         colorBgContainer: "#FFFFFF",
       }
       
-      const authSdkLink = new URL("http://192.168.3.5:5173/auth");
+      const authSdkLink = new URL("https://sdk.finsquid.io/auth");
       authSdkLink.searchParams.set("api_key", apiKey);
       authSdkLink.searchParams.set("iframe", "true");
       authSdkLink.searchParams.set("theme", JSON.stringify(theme));
@@ -103,7 +103,7 @@ You can use these examples to get started with the Auth SDK.
         colorBgContainer: "#FFFFFF",
       }
       
-      const authSdkLink = new URL("http://192.168.3.5:5173/auth");
+      const authSdkLink = new URL("https://sdk.finsquid.io/auth");
       authSdkLink.searchParams.set("api_key", apiKey);
       authSdkLink.searchParams.set("theme", JSON.stringify(theme));
       authSdkLink.searchParams.set("lang", "en");
