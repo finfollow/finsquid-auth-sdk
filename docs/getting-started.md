@@ -8,6 +8,8 @@ nav_order: 1
 
 First you need to get your `Primary Token` from [Finsquid](https://www.finsquid.io/contact). Using your Primary Token you should get Temporary Token.
 
+It is **forbidden** to store your Primary Token on the client side so you should use Temporary Token for all API requests from client. However you can use Primary Token on your server in the same way.
+
 ## Getting Temporary Access Token
 
 You can get Temporary Token using the `GET v1/token/create` endpoint. The request must be authenticated using your primary token.
@@ -42,6 +44,9 @@ For instance to get providers list:
 curl -X GET 'https://gateway.finsquid.io/v1/providers' \
 -H 'Authorization: Bearer {TEMPORARY_TOKEN}'
 ```
-It is not recommended to store your Primary Token on the client side so you should use Temporary Token for all API requests from client. However you can use Primary Token on your server in the same way.
 
 ### [API Documentation](https://gateway.finsquid.io/doc)
+
+## Flow Diagram
+
+[![Flow Diagram](./images/flow-diagram.png)](./images/flow-diagram.png)
