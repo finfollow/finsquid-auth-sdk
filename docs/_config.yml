@@ -36,7 +36,7 @@ aux_links:
 # External navigation links
 nav_external_links:
   - title: API Documentation
-    url: https://gateway.finsquid.io/doc
+    url: https://gateway-staging.finsquid.io/doc
     opens_in_new_tab: true # set to true to open this link in a new tab - defaults to false
 
 plugins:

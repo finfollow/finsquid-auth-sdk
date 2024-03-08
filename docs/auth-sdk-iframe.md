@@ -14,7 +14,7 @@ nav_order: 2
 First you need to get your [Temporary Token](getting-started.html). After you have it append the URL parameter `api_key=${TEMPORARY_TOKEN}` and the URL parameter `iframe=true` to your `authentication link`. This will make sure that the response message is sent via `postMessage` to the parent window.
 
 ```js
-const AUTH_LINK = new URL("https://sdk.finsquid.io/auth");
+const AUTH_LINK = new URL("https://sdk-staging.finsquid.io/auth");
 AUTH_LINK.searchParams.set("api_key", TEMPORARY_TOKEN);
 AUTH_LINK.searchParams.set("iframe", true);
 ```

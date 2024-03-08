@@ -17,7 +17,7 @@ You can directly embed Finsquid Aggregate within your web app using an iframe.
 First you need to get your [Temporary Token](getting-started.html). After you have it append the URL parameter `api_key=${TEMPORARY_TOKEN}` and the URL parameter `iframe=true` to your `aggregation link`. This will make sure that the response message is sent via `postMessage` to the parent window.
 
 ```js
-const AGGREGATE_LINK = new URL("https://sdk.finsquid.io/aggregate");
+const AGGREGATE_LINK = new URL("https://sdk-staging.finsquid.io/aggregate");
 AGGREGATE_LINK.searchParams.set("api_key", TEMPORARY_TOKEN);
 AUTH_LINK.searchParams.set("iframe", true);
 ```

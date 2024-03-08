@@ -44,7 +44,7 @@ Just copy/paste the code below in your HTML file and open in the browser.
         colorBgContainer: "#FFFFFF",
       }
       
-      const authSdkLink = new URL("https://sdk.finsquid.io/auth");
+      const authSdkLink = new URL("https://sdk-staging.finsquid.io/auth");
       authSdkLink.searchParams.set("api_key", apiKey);
       authSdkLink.searchParams.set("iframe", "true");
       authSdkLink.searchParams.set("theme", JSON.stringify(theme));
@@ -123,7 +123,7 @@ http-server
         colorBgContainer: "#FFFFFF",
       }
       
-      const authSdkLink = new URL("https://sdk.finsquid.io/auth");
+      const authSdkLink = new URL("https://sdk-staging.finsquid.io/auth");
       authSdkLink.searchParams.set("api_key", apiKey);
       authSdkLink.searchParams.set("theme", JSON.stringify(theme));
       authSdkLink.searchParams.set("lang", "en");
