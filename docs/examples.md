@@ -10,6 +10,8 @@ You can use these examples to get started with the Auth SDK.
 
 ## Auth SDK Embed in iframe
 
+Just copy/paste the code below in your HTML file and open in the browser.
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -21,9 +23,9 @@ You can use these examples to get started with the Auth SDK.
   <body style="margin: 0;">
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: center">
       <iframe style="width: 100%; height: 100vh; border: none; display: none;"></iframe>
+      <div id="result"></div>
       <button onclick="handleConnect()" style="width: 348px; margin-top: 50px; height: 40px; border-radius: 20px; color: #fff; background-color: #7d00ff; box-shadow: 0 2px 0 rgba(165, 5, 255, 0.1); border: 1px solid transparent;">Connect</button>
     </div>
-    <div id="root" style="width: 100%; height: 100%"></div>
   </body>
   <script>
     const baseUrl = window.location;
@@ -53,7 +55,8 @@ You can use these examples to get started with the Auth SDK.
     }
 
     const handlePostMessage = (event) => {
-      if (event.target.origin !== baseUrl.origin) return;
+      // Commented out to enable functionality when opening the HTML file in a browser, should be in place in production
+      // if (event.target.origin !== baseUrl.origin) return;
       const { type, data, error } = event.data;
 
       if (type === "success") {
@@ -74,6 +77,8 @@ You can use these examples to get started with the Auth SDK.
 ```
 
 ## Auth SDK Redirect
+
+Copy/paste the code below in your HTML file and run it on the local server.
 
 ```html
 <!DOCTYPE html>
