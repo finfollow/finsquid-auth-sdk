@@ -80,6 +80,21 @@ Just copy/paste the code below in your HTML file and open in the browser.
 
 Copy/paste the code below in your HTML file and run it on the local server.
 
+### Run Local Server
+
+* If you have Node.js installed, you can use the http-server package to quickly serve static files.
+
+* First, install http-server globally via npm:
+```bash
+npm install -g http-server
+```
+
+* Then navigate to the directory containing your HTML file in the terminal and run:
+```bash
+http-server
+```
+* Your files will be served at http://localhost:8080 by default.
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
