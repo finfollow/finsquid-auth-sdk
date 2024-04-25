@@ -147,8 +147,6 @@ http-server
         }
       }
     });
-
-    window.addEventListener("message", handlePostMessage);
   </script>
 </html>
 ```
